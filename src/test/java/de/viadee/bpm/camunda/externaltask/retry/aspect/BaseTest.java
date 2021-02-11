@@ -26,7 +26,7 @@ import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked", "rawtypes"})
 @ContextConfiguration(classes = {ExternalTaskRetryAspectAutoConfiguration.class})
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)
@@ -39,9 +39,9 @@ public abstract class BaseTest {
     static final long DAYS_TO_MILLIS    = 24 * 60 * 60 * 1000L; // h * m * s * ms
     //@formatter:on
 
-    ExternalTask externalTask = mock(ExternalTask.class);
-    ExternalTaskService externalTaskService = mock(ExternalTaskService.class);
-    JoinPoint joinPoint = mock(JoinPoint.class);
+    final ExternalTask externalTask = mock(ExternalTask.class);
+    final ExternalTaskService externalTaskService = mock(ExternalTaskService.class);
+    final JoinPoint joinPoint = mock(JoinPoint.class);
     ArgumentCaptor<String> errorMessage;
     ArgumentCaptor<String> errorDetails;
     ArgumentCaptor<String> errorCode;

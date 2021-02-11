@@ -17,10 +17,10 @@ public final class PropertyService {
     private static final String FALLBACK_RETRY_TIME_CYCLE = "R3/PT5M";
 
     private final Pattern retryTimeListPattern = Pattern.compile(RETRY_TIME_LIST_PATTERN);
-    private static final String RETRY_TIME_LIST_PATTERN = "^([Pp](?:\\d+[Dd])?(?:[Tt](?!$)(?:\\d+[Hh])?(?:\\d+[Mm])?(?:\\d+[Ss])?)?){1}(,([Pp](?:\\d+[Dd])?(?:[Tt](?!$)(?:\\d+[Hh])?(?:\\d+[Mm])?(?:\\d+[Ss])?)?))*$";
+    private static final String RETRY_TIME_LIST_PATTERN = "^([Pp](?:\\d+[Dd])?(?:[Tt](?!$)(?:\\d+[Hh])?(?:\\d+[Mm])?(?:\\d+[Ss])?)?)(,([Pp](?:\\d+[Dd])?(?:[Tt](?!$)(?:\\d+[Hh])?(?:\\d+[Mm])?(?:\\d+[Ss])?)?))*$";
 
     private final Pattern retryTimeCyclePattern = Pattern.compile(RETRY_TIME_CYCLE_PATTERN);
-    private static final String RETRY_TIME_CYCLE_PATTERN = "^(?:[Rr](?<times>\\d+)\\/)(?<interval>(?:[Pp](?:\\d+[Yy])?)(?:\\d+[Mm])?(?:\\d+[Dd])?(?:[Tt](?!$)(?:\\d+[Hh])?(?:\\d+[Mm])?(?:\\d+[Ss])?)?){1}$";
+    private static final String RETRY_TIME_CYCLE_PATTERN = "^(?:[Rr](?<times>\\d+)/)(?<interval>(?:[Pp](?:\\d+[Yy])?)(?:\\d+[Mm])?(?:\\d+[Dd])?(?:[Tt](?!$)(?:\\d+[Hh])?(?:\\d+[Mm])?(?:\\d+[Ss])?)?)$";
 
     private final String defaultRetryTimeCycle;
     private final String retryTimeCycleIdentifier;
@@ -41,7 +41,8 @@ public final class PropertyService {
         if (retries != null && retries > 0) {
             retries = retries - 1;
 
-        } else if (retries != null && retries <= 0) {
+        } else //noinspection ConstantConditions
+            if (retries != null && retries <= 0) {
             retries = 0;
 
         } else {
