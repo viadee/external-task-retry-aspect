@@ -33,30 +33,34 @@ package de.viadee.bpm.camunda.externaltask.retry.aspect.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.Objects;
+
 
 @ConfigurationProperties(prefix = "de.viadee.bpm.camunda.external-task")
 public class ExternalTaskRetryAspectProperties {
 
     //@formatter:off
-    private String defaultRetryTimeCycle     = "R3/PT5M";
-    private String retryTimeCycleIdentifier  = "RETRY_CONFIG";
+    private String defaultRetryConfig  = "R3/PT5M";
+    private String retryConfigName     = "RETRY_CONFIG";
     //@formatter:on
 
 
-    public String getDefaultRetryTimeCycle() {
-        return this.defaultRetryTimeCycle;
+    public String getDefaultRetryConfig() {
+        return this.defaultRetryConfig;
     }
 
-    public void setDefaultRetryTimeCycle(final String defaultRetryTimeCycle) {
-        this.defaultRetryTimeCycle = defaultRetryTimeCycle;
+    public void setDefaultRetryConfig(final String defaultRetryConfig) {
+        if (Objects.isNull(defaultRetryConfig) || defaultRetryConfig.trim().isEmpty()) return;
+        this.defaultRetryConfig = defaultRetryConfig.replace(" ", "").toUpperCase();
     }
 
-    public String getRetryTimeCycleIdentifier() {
-        return this.retryTimeCycleIdentifier;
+    public String getRetryConfigName() {
+        return this.retryConfigName;
     }
 
-    public void setRetryTimeCycleIdentifier(final String retryTimeCycleIdentifier) {
-        this.retryTimeCycleIdentifier = retryTimeCycleIdentifier;
+    public void setRetryConfigName(final String retryConfigName) {
+        if (Objects.isNull(retryConfigName) || retryConfigName.trim().isEmpty()) return;
+        this.retryConfigName = retryConfigName;
     }
 
 }

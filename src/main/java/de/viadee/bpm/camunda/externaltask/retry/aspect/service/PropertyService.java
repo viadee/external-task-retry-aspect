@@ -31,17 +31,18 @@
  */
 package de.viadee.bpm.camunda.externaltask.retry.aspect.service;
 
+import de.viadee.bpm.camunda.externaltask.retry.aspect.config.ExternalTaskRetryAspectProperties;
 import de.viadee.bpm.camunda.externaltask.retry.aspect.model.RetryBehaviour;
-import de.viadee.bpm.camunda.externaltask.retry.aspect.model.RetryValueVault;
+import de.viadee.bpm.camunda.externaltask.retry.aspect.model.RetryConfigValues;
 import org.camunda.bpm.client.task.ExternalTask;
 
 
 public final class PropertyService {
 
-    private final RetryValueVault valueVault;
+    private final RetryConfigValues valueVault;
 
-    public PropertyService(final String defaultRetryTimeCycle, final String retryTimeCycleIdentifier) {
-        this.valueVault = new RetryValueVault(defaultRetryTimeCycle, retryTimeCycleIdentifier);
+    public PropertyService(final ExternalTaskRetryAspectProperties properties) {
+        this.valueVault = new RetryConfigValues(properties.getDefaultRetryConfig(), properties.getRetryConfigName());
     }
 
 

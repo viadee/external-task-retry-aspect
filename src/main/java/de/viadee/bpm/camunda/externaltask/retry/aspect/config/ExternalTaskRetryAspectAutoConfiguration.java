@@ -77,8 +77,6 @@ public class ExternalTaskRetryAspectAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public PropertyService propertyService() {
-        return new PropertyService(
-                this.externalTaskRetryAspectProperties.getDefaultRetryTimeCycle(),
-                this.externalTaskRetryAspectProperties.getRetryTimeCycleIdentifier());
+        return new PropertyService(this.externalTaskRetryAspectProperties);
     }
 }
