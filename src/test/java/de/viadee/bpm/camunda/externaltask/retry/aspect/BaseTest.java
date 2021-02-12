@@ -33,27 +33,27 @@ import static org.mockito.Mockito.mock;
 public abstract class BaseTest {
 
     //@formatter:off
-    static final long SECONDS_TO_MILLIS =                1000L; //             ms
-    static final long MINUTES_TO_MILLIS =           60 * 1000L; //         s * ms
-    static final long HOURS_TO_MILLIS   =      60 * 60 * 1000L; //     m * s * ms
-    static final long DAYS_TO_MILLIS    = 24 * 60 * 60 * 1000L; // h * m * s * ms
+    protected static final long SECONDS_TO_MILLIS =                1000L; //             ms
+    protected static final long MINUTES_TO_MILLIS =           60 * 1000L; //         s * ms
+    protected static final long HOURS_TO_MILLIS   =      60 * 60 * 1000L; //     m * s * ms
+    protected static final long DAYS_TO_MILLIS    = 24 * 60 * 60 * 1000L; // h * m * s * ms
     //@formatter:on
 
-    final ExternalTask externalTask = mock(ExternalTask.class);
-    final ExternalTaskService externalTaskService = mock(ExternalTaskService.class);
-    final JoinPoint joinPoint = mock(JoinPoint.class);
-    ArgumentCaptor<String> errorMessage;
-    ArgumentCaptor<String> errorDetails;
-    ArgumentCaptor<String> errorCode;
-    ArgumentCaptor<Map> errorVariables;
-    ArgumentCaptor<Integer> remainingRetries;
-    ArgumentCaptor<Long> nextRetryInterval;
+    protected final ExternalTask externalTask = mock(ExternalTask.class);
+    protected final ExternalTaskService externalTaskService = mock(ExternalTaskService.class);
+    protected final JoinPoint joinPoint = mock(JoinPoint.class);
+    protected ArgumentCaptor<String> errorMessage;
+    protected ArgumentCaptor<String> errorDetails;
+    protected ArgumentCaptor<String> errorCode;
+    protected ArgumentCaptor<Map> errorVariables;
+    protected ArgumentCaptor<Integer> remainingRetries;
+    protected ArgumentCaptor<Long> nextRetryInterval;
 
     @Autowired
-    ExternalTaskRetryAspect externalTaskRetryAspect;
+    protected ExternalTaskRetryAspect externalTaskRetryAspect;
 
     @Autowired
-    ExternalTaskRetryAspectProperties properties;
+    protected ExternalTaskRetryAspectProperties properties;
 
 
     @Before
@@ -69,7 +69,7 @@ public abstract class BaseTest {
         this.nextRetryInterval = ArgumentCaptor.forClass(Long.class);
     }
 
-    void verifyNoBpmnErrorAtAll() {
+    protected void verifyNoBpmnErrorAtAll() {
         Mockito.verify(this.externalTaskService,
                 Mockito.times(0))
                     .handleBpmnError(any(ExternalTask.class), anyString(), anyString());
@@ -79,7 +79,7 @@ public abstract class BaseTest {
                     .handleBpmnError(any(ExternalTask.class), anyString(), anyString(), anyMap());
     }
 
-    void verifyBpmnErrorWithoutVariables() {
+    protected void verifyBpmnErrorWithoutVariables() {
         Mockito.verify(this.externalTaskService,
                 Mockito.times(1))
                     .handleBpmnError(any(ExternalTask.class), this.errorCode.capture(), this.errorMessage.capture());
@@ -89,7 +89,7 @@ public abstract class BaseTest {
                     .handleBpmnError(any(ExternalTask.class), anyString(), anyString(), anyMap());
     }
 
-    void verifyBpmnErrorWithVariables() {
+    protected void verifyBpmnErrorWithVariables() {
         Mockito.verify(this.externalTaskService,
                 Mockito.times(1))
                     .handleBpmnError(any(ExternalTask.class), this.errorCode.capture(), this.errorMessage.capture(), this.errorVariables.capture());
@@ -99,47 +99,47 @@ public abstract class BaseTest {
                     .handleBpmnError(any(ExternalTask.class), anyString(), anyString());
     }
 
-    void verifyNoFailure() {
+    protected void verifyNoFailure() {
         Mockito.verify(this.externalTaskService,
                 Mockito.times(0))
                     .handleFailure(any(ExternalTask.class), this.errorMessage.capture(), anyString(), anyInt(), anyLong());
     }
 
-    void verifyHandleFailure() {
+    protected void verifyHandleFailure() {
         Mockito.verify(this.externalTaskService,
                 Mockito.times(1))
                     .handleFailure(any(ExternalTask.class), this.errorMessage.capture(), this.errorDetails.capture(), this.remainingRetries.capture(), this.nextRetryInterval.capture());
     }
 
-    void assertErrorMessage(final String expectedErrorMessage) {
+    protected void assertErrorMessage(final String expectedErrorMessage) {
         assertEquals(expectedErrorMessage, this.errorMessage.getValue());
     }
 
-    void assertErrorDetails(final Throwable expectedThrowable) {
+    protected void assertErrorDetails(final Throwable expectedThrowable) {
         this.assertErrorDetails(this.getStackTrace(expectedThrowable));
     }
 
-    void assertErrorDetails(final String expectedErrorDetails) {
+    protected void assertErrorDetails(final String expectedErrorDetails) {
         assertEquals(expectedErrorDetails, this.errorDetails.getValue());
     }
 
-    void assertNoRemainingRetries() {
+    protected void assertNoRemainingRetries() {
         this.assertRemainingRetries(0);
     }
 
-    void assertRemainingRetries(final int expectedRemainingRetries) {
+    protected void assertRemainingRetries(final int expectedRemainingRetries) {
         assertEquals(expectedRemainingRetries, this.remainingRetries.getValue());
     }
 
-    void assertNextRetryInterval(final long expectedNextRetryInterval) {
+    protected void assertNextRetryInterval(final long expectedNextRetryInterval) {
         assertEquals(expectedNextRetryInterval, this.nextRetryInterval.getValue());
     }
 
-    void assertBpmnErrorCode(final String expectedBpmnErrorCode) {
+    protected void assertBpmnErrorCode(final String expectedBpmnErrorCode) {
         assertEquals(expectedBpmnErrorCode, this.errorCode.getValue());
     }
 
-    String getStackTrace(final Throwable throwable) {
+    protected String getStackTrace(final Throwable throwable) {
         StringWriter stackTrace = new StringWriter();
         PrintWriter printWriter = new PrintWriter(stackTrace, true);
         throwable.printStackTrace(printWriter);

@@ -34,7 +34,7 @@ public class FailureService {
                               final Throwable throwable,
                               final boolean directIncident) {
 
-        final int remainingRetries = directIncident ? 0 : this.propertyService.determineRemainingRetries(externalTask);
+        final int remainingRetries = directIncident ? 0 : this.propertyService.remainingRetries(externalTask);
         final long nextRetryInterval = directIncident ? 0 : this.propertyService.nextRetryInterval(externalTask);
 
         this.logFailure(origin, throwable, remainingRetries, nextRetryInterval);

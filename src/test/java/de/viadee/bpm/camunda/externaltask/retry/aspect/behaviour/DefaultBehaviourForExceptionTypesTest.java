@@ -1,5 +1,6 @@
-package de.viadee.bpm.camunda.externaltask.retry.aspect;
+package de.viadee.bpm.camunda.externaltask.retry.aspect.behaviour;
 
+import de.viadee.bpm.camunda.externaltask.retry.aspect.BaseTest;
 import de.viadee.bpm.camunda.externaltask.retry.aspect.error.ExternalTaskBusinessError;
 import de.viadee.bpm.camunda.externaltask.retry.aspect.error.InstantIncidentException;
 import org.camunda.bpm.engine.variable.VariableMap;

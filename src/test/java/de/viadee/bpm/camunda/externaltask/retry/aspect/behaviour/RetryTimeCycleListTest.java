@@ -1,5 +1,6 @@
-package de.viadee.bpm.camunda.externaltask.retry.aspect;
+package de.viadee.bpm.camunda.externaltask.retry.aspect.behaviour;
 
+import de.viadee.bpm.camunda.externaltask.retry.aspect.BaseTest;
 import org.junit.Test;
 
 import java.util.Objects;
