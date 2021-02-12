@@ -41,12 +41,12 @@ public class RetryBehaviour {
 
     private final RetryCount retryCount;
     private final RetryConfig retryConfig;
-    private final RetryValueVault valueVault;
+    private final RetryConfigValues valueVault;
 
-    public RetryBehaviour(final ExternalTask externalTask, final RetryValueVault valueVault) {
+    public RetryBehaviour(final ExternalTask externalTask, final RetryConfigValues valueVault) {
         this.valueVault = valueVault;
         this.retryCount = new RetryCount(externalTask.getRetries());
-        this.retryConfig = new RetryConfig(externalTask.getExtensionProperty(valueVault.getRetryConfigIdentifier()), valueVault);
+        this.retryConfig = new RetryConfig(externalTask.getExtensionProperty(valueVault.getRetryConfigName()), valueVault);
     }
 
     public boolean hasRetries() {

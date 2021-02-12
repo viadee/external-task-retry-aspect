@@ -37,7 +37,7 @@ public class RetryConfig {
 
     private final String retryProperty;
 
-    public RetryConfig(final String retryProperty, final RetryValueVault valueVault) {
+    public RetryConfig(final String retryProperty, final RetryConfigValues valueVault) {
         if (Objects.isNull(retryProperty) || retryProperty.trim().isEmpty()) {
             this.retryProperty = valueVault.getDefaultRetryConfig();
         } else {

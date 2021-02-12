@@ -73,7 +73,7 @@ public class EdgeCaseTest extends BaseTest {
         // prepare
         when(this.externalTask.getRetries()).thenReturn(null);
         when(this.externalTask
-                .getExtensionProperty(this.properties.getRetryTimeCycleIdentifier()))
+                .getExtensionProperty(this.properties.getRetryConfigName()))
                     .thenReturn("P,P,P"); // sadly, 'P' is matched by the used regex currently -> use hard-wired Fallback 'PT10M' then
 
         // test

@@ -34,17 +34,45 @@ package de.viadee.bpm.camunda.externaltask.retry.aspect.error;
 
 public final class InstantIncidentException extends RuntimeException {
 
+    /**
+     * This error-type can used to report a failure in the context of the
+     * current task and skip the retry-behaviour configured in process-model,
+     * resp. the default behaviour.
+     *
+     */
     public InstantIncidentException() {
     }
 
+    /**
+     * This error-type can used to report a failure in the context of the
+     * current task and skip the retry-behaviour configured in process-model,
+     * resp. the default behaviour.
+     *
+     * @param message error-message passed to the process
+     */
     public InstantIncidentException(final String message) {
         super(message);
     }
 
+    /**
+     * This error-type can used to report a failure in the context of the
+     * current task and skip the retry-behaviour configured in process-model,
+     * resp. the default behaviour.
+     *
+     * @param message error-message passed to the process
+     * @param cause root cause passed to the process
+     */
     public InstantIncidentException(final String message, final Throwable cause) {
         super(message, cause);
     }
 
+    /**
+     * This error-type can used to report a failure in the context of the
+     * current task and skip the retry-behaviour configured in process-model,
+     * resp. the default behaviour.
+     *
+     * @param cause root cause passed to the process
+     */
     public InstantIncidentException(final Throwable cause) {
         super(cause);
     }
