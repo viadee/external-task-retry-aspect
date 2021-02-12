@@ -34,7 +34,7 @@ a `spring-boot-starter`, the aspect will be loaded automatically as soon as the 
     </dependency>
 </dependencies>
 ```
-2. Add extension-property to an external-task
+2. Add extension-property to an external-task:
 ![](docs/external-task-extension-properties.png)
    - The property-name is configurable, see below
    - Possible values might be
