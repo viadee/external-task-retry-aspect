@@ -42,7 +42,7 @@ public final class PropertyService {
     private final RetryConfigValues valueVault;
 
     public PropertyService(final ExternalTaskRetryAspectProperties properties) {
-        this.valueVault = new RetryConfigValues(properties.getDefaultRetryConfig(), properties.getRetryConfigName());
+        this.valueVault = new RetryConfigValues(properties);
     }
 
 

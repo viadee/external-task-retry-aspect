@@ -31,7 +31,8 @@
  */
 package de.viadee.bpm.camunda.externaltask.retry.aspect.model;
 
-import java.util.Objects;
+import de.viadee.bpm.camunda.externaltask.retry.aspect.config.ExternalTaskRetryAspectProperties;
+
 import java.util.regex.Pattern;
 
 public final class RetryConfigValues {
@@ -48,21 +49,19 @@ public final class RetryConfigValues {
     private static final Pattern RETRY_CYCLE_PATTERN         = Pattern.compile(RETRY_CYCLE_REGEX);
     //@formatter:on
 
-    private final String defaultRetryConfig;
-    private final String retryConfigName;
+    private final ExternalTaskRetryAspectProperties properties;
 
 
-    public RetryConfigValues(final String defaultRetryConfig, final String retryConfigName) {
-        this.retryConfigName = retryConfigName;
-        this.defaultRetryConfig = defaultRetryConfig;
+    public RetryConfigValues(final ExternalTaskRetryAspectProperties properties) {
+        this.properties = properties;
     }
 
     public String getRetryConfigName() {
-        return this.retryConfigName;
+        return this.properties.getRetryConfigName();
     }
 
     public String getDefaultRetryConfig() {
-        return this.defaultRetryConfig;
+        return this.properties.getDefaultRetryConfig();
     }
 
     public Pattern getRetryListPattern() {

@@ -79,4 +79,5 @@ public class ExternalTaskRetryAspectAutoConfiguration {
     public PropertyService propertyService() {
         return new PropertyService(this.externalTaskRetryAspectProperties);
     }
+
 }

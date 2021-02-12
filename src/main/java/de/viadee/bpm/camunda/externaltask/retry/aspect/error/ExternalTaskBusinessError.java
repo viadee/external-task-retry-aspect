@@ -31,6 +31,8 @@
  */
 package de.viadee.bpm.camunda.externaltask.retry.aspect.error;
 
+import org.camunda.bpm.client.task.ExternalTaskService;
+
 import java.util.Map;
 import java.util.Objects;
 
@@ -40,24 +42,54 @@ public final class ExternalTaskBusinessError extends RuntimeException {
     private String errorMessage;
     private Map<String, Object> variables;
 
+    /**
+     * This error-type is used to report a business error in the context of the current task.
+     * For more information see @{@link ExternalTaskService}
+     *
+     */
     public ExternalTaskBusinessError() {
         // nop
     }
 
+
+    /**
+     * This error-type is used to report a business error in the context of the current task.
+     * For more information see @{@link ExternalTaskService}
+     *
+     * @param errorCode the error-code is used to identify the BPMN error in process
+     */
     public ExternalTaskBusinessError(final String errorCode) {
         this(errorCode, null);
     }
 
+
+    /**
+     * This error-type is used to report a business error in the context of the current task.
+     * For more information see @{@link ExternalTaskService}
+     *
+     * @param errorCode the error-code is used to identify the BPMN error in process
+     * @param errorMessage reason for failure
+     */
     public ExternalTaskBusinessError(final String errorCode, final String errorMessage) {
         this(errorCode, errorMessage, null);
     }
 
+
+    /**
+     * This error-type is used to report a business error in the context of the current task.
+     * For more information see @{@link ExternalTaskService}
+     *
+     * @param errorCode used to identify the BPMN error in process
+     * @param errorMessage reason for failure which is passed to the process
+     * @param variables passed to the process when the error is caught
+     */
     public ExternalTaskBusinessError(final String errorCode, final String errorMessage, final Map<String, Object> variables) {
         super(Objects.nonNull(errorMessage) ? errorMessage : errorCode);
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
         this.variables = variables;
     }
+
 
     public String getErrorCode() {
         return this.errorCode;
