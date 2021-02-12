@@ -36,8 +36,8 @@ a `spring-boot-starter`, the aspect will be loaded automatically as soon as the 
 ```
 2. Add extension-property to an external-task:
 ![](docs/external-task-extension-properties.png)
-   - The property-name is configurable, see below
-   - Possible values might be
+   - The property-name is configurable (see below), default: `RETRY_CONFIG`
+   - Possible values might be, default: `R3/PT5M`
      - `R1/P1D`: 1 retry after 1 day
      - `R2/PT2H`: 2 retries after 2 hours each
      - `R3/PT3M`: 3 retries after 3 minutes each
@@ -63,14 +63,14 @@ These properties are available, they can be set e.g. in `application.properties`
 ```properties
 # Default retry-behaviour, if no retry is configured. 
 # Whenever this property is configured incorrectly, 'R3/PT5M' is also used as fallback
-de.viadee.bpm.camunda.external-task.default-retry-time-cycle=R3/PT5M
+de.viadee.bpm.camunda.external-task.default-retry-config=R3/PT5M
 
 # Identifier used in bpmn-extension-properties, default=RETRY_CONFIG
-de.viadee.bpm.camunda.external-task.retry-time-cycle-identifier=RETRY_CONFIG
+de.viadee.bpm.camunda.external-task.retry-config-name=RETRY_CONFIG
 ```
 
 ## How this might help?
-A comparison of some `ConventionalHandler` with a `AspectedHandler` explains how the error-handling 
+A comparison of some `ConventionalHandler` with an `AspectedHandler` explains how the error-handling 
 can be completely left out, because anything is done by the `retry-aspect`:
 
 ### `ConventionalHandler` without retry-aspect
@@ -99,11 +99,11 @@ public class ConventionalHandler implements ExternalTaskHandler {
 
 ```
 
-### `AspectedHandler` with retry-aspect
+### `AspectedHandler` using retry-aspect
 
 * No `try-catch` needed, this is done automatically
 * `ExternalTaskBusinessError` can be used to trigger `handleBpmnError()`
-* `InstantIncidentException` cen be used to skip retries and create an incident instantly
+* `InstantIncidentException` can be used to skip retries and create an incident instantly
 
 ```java
 public class AspectedHandler implements ExternalTaskHandler {
