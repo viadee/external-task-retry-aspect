@@ -65,7 +65,7 @@ public class ExternalTaskRetryAspect {
     @AfterThrowing(pointcut = "externalTaskHandlerExecute(externalTask, externalTaskService)",
                    throwing = "exception", argNames = "joinPoint,exception,externalTask,externalTaskService")
     public void handleErrorAfterThrown(final JoinPoint joinPoint,
-                                       final Throwable exception,
+                                       final Exception exception,
                                        final ExternalTask externalTask,
                                        final ExternalTaskService externalTaskService) {
 
