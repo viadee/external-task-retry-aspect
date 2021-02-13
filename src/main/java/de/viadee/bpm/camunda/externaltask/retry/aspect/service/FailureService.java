@@ -53,27 +53,27 @@ public class FailureService {
     public void handleFailure(final Class<?> origin,
                               final ExternalTask externalTask,
                               final ExternalTaskService externalTaskService,
-                              final Throwable throwable) {
+                              final Exception exception) {
 
-        this.handleFailure(origin, externalTask, externalTaskService, throwable, false);
+        this.handleFailure(origin, externalTask, externalTaskService, exception, false);
     }
 
 
     public void handleFailure(final Class<?> origin,
                               final ExternalTask externalTask,
                               final ExternalTaskService externalTaskService,
-                              final Throwable throwable,
+                              final Exception exception,
                               final boolean directIncident) {
 
         final int remainingRetries = directIncident ? 0 : this.propertyService.remainingRetries(externalTask);
         final long nextRetryInterval = directIncident ? 0 : this.propertyService.nextRetryInterval(externalTask);
 
-        this.logFailure(origin, throwable, remainingRetries, nextRetryInterval);
+        this.logFailure(origin, exception, remainingRetries, nextRetryInterval);
 
         externalTaskService.handleFailure(
                 externalTask,
-                this.getErrorMessage(throwable),
-                this.getStackTrace(throwable),
+                this.getErrorMessage(exception),
+                this.getStackTrace(exception),
                 remainingRetries,
                 nextRetryInterval);
     }
