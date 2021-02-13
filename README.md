@@ -86,7 +86,7 @@ public class ConventionalHandler implements ExternalTaskHandler {
             // ...or maybe end with some bpmn-error, that has to be handled within process
             service.handleBpmnError(task, "bpmn-error-code");
 
-        } catch (Throwable error) {
+        } catch (Exception error) {
             // catch errors and think about retries and timeout
             service.handleFailure(task,
                     "error-message",        // shown in Camunda Cockpit
