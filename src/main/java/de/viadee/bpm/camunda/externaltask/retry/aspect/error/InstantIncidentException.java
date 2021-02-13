@@ -32,7 +32,7 @@
 package de.viadee.bpm.camunda.externaltask.retry.aspect.error;
 
 
-public final class InstantIncidentException extends Exception {
+public final class InstantIncidentException extends RuntimeException {
 
     /**
      * This error-type can used to report a failure in the context of the
