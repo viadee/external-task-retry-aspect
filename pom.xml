@@ -8,7 +8,7 @@
     <artifactId>external-task-retry-aspect-spring-boot-starter</artifactId>
     <name>External Task Retry Aspect</name>
     <description>This tool helps to control the retry-behaviour in external-task-handlers based on the official java-client provided by Camunda BPM</description>
-    <version>1.1.1</version>
+    <version>1.1.2-SNAPSHOT</version>
     <inceptionYear>2021</inceptionYear>
 
     <organization>
