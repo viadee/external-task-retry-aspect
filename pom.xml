@@ -13,8 +13,10 @@
 
     <organization>
         <name>viadee Unternehmensberatung AG</name>
-        <url>http://www.viadee.de</url>
+        <url>https://www.viadee.de</url>
     </organization>
+
+    <url>https://github.com/viadee/external-task-retry-aspect</url>
 
     <developers>
         <developer>
