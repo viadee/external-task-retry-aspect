@@ -10,7 +10,7 @@
     <description>This tool helps to control the retry-behaviour in external-task-handlers based on the official java-client provided by
         Camunda BPM
     </description>
-    <version>1.1.3</version>
+    <version>1.1.4</version>
     <inceptionYear>2021</inceptionYear>
 
     <organization>
@@ -40,16 +40,17 @@
         <spring-boot.version>2.4.2</spring-boot.version>
         <external-task-client.version>1.4.1</external-task-client.version>
         <commons-lang3.version>3.11</commons-lang3.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.2</junit.version>
         <mockito.version>3.7.7</mockito.version>
 
-        <maven-release-plugin.version>3.0.0-M1</maven-release-plugin.version>
-        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-        <license-maven-plugin.version>3.0</license-maven-plugin.version>
-        <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
-        <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
+        <!-- plugins -->
+        <maven-release.version>3.0.0-M1</maven-release.version>
+        <maven-source.version>3.2.1</maven-source.version>
+        <maven-compiler.version>3.8.1</maven-compiler.version>
+        <license-maven.version>3.0</license-maven.version>
+        <maven-javadoc.version>3.2.0</maven-javadoc.version>
+        <maven-gpg.version>1.6</maven-gpg.version>
+        <gitflow-maven.version>1.15.1</gitflow-maven.version>
 
     </properties>
 
@@ -82,7 +83,7 @@
         </dependency>
 
 
-        <!-- Test -->
+        <!-- test -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
@@ -121,7 +122,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>${maven-gpg-plugin.version}</version>
+                        <version>${maven-gpg.version}</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -154,7 +155,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
-                    <version>${maven-release-plugin.version}</version>
+                    <version>${maven-release.version}</version>
                     <executions>
                         <execution>
                             <goals>
@@ -170,7 +171,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>${maven-source-plugin.version}</version>
+                <version>${maven-source.version}</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -182,14 +183,9 @@
             </plugin>
 
             <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire-plugin.version}</version>
-            </plugin>
-
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
+                <version>${maven-compiler.version}</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -199,7 +195,7 @@
             <plugin>
                 <groupId>com.mycila</groupId>
                 <artifactId>license-maven-plugin</artifactId>
-                <version>${license-maven-plugin.version}</version>
+                <version>${license-maven.version}</version>
                 <configuration>
                     <header>src/main/resources/BSD3-license.txt</header>
                     <properties>
@@ -244,7 +240,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${maven-javadoc-plugin.version}</version>
+                <version>${maven-javadoc.version}</version>
                 <configuration>
                     <detectJavaApiLink>false</detectJavaApiLink>
                 </configuration>
@@ -256,6 +252,22 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.amashchenko.maven.plugin</groupId>
+                <artifactId>gitflow-maven-plugin</artifactId>
+                <version>${gitflow-maven.version}</version>
+                <configuration>
+                    <gitFlowConfig>
+                        <productionBranch>main</productionBranch>
+                        <developmentBranch>main</developmentBranch>
+                        <featureBranchPrefix>feature/</featureBranchPrefix>
+                        <releaseBranchPrefix>version/</releaseBranchPrefix>
+                        <versionTagPrefix>v</versionTagPrefix>
+                    </gitFlowConfig>
+                    <!-- optional configuration -->
+                </configuration>
             </plugin>
 
         </plugins>
