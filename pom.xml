@@ -261,7 +261,7 @@
                 <configuration>
                     <gitFlowConfig>
                         <productionBranch>main</productionBranch>
-                        <developmentBranch>main</developmentBranch>
+                        <developmentBranch>develop</developmentBranch>
                         <featureBranchPrefix>feature/</featureBranchPrefix>
                         <releaseBranchPrefix>version/</releaseBranchPrefix>
                         <versionTagPrefix>v</versionTagPrefix>
