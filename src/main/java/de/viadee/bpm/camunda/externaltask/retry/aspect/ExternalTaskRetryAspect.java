@@ -41,7 +41,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.camunda.bpm.client.task.ExternalTask;
 import org.camunda.bpm.client.task.ExternalTaskService;
-import org.camunda.bpm.client.task.impl.ExternalTaskServiceImpl;
 
 
 @Aspect
@@ -59,7 +58,7 @@ public class ExternalTaskRetryAspect {
                                     "&& args(externalTask, externalTaskService)",
               argNames = "externalTask,externalTaskService")
     public void externalTaskHandlerExecute(final ExternalTask externalTask,
-                                           final ExternalTaskServiceImpl externalTaskService) {
+                                           final ExternalTaskService externalTaskService) {
     }
 
     @AfterThrowing(pointcut = "externalTaskHandlerExecute(externalTask, externalTaskService)",
