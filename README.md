@@ -1,5 +1,7 @@
 # external-task-retry-aspect
 [![](https://img.shields.io/maven-central/v/de.viadee.bpm.camunda/external-task-retry-aspect-spring-boot-starter)](https://github.com/viadee/external-task-retry-aspect)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/viadee/external-task-retry-aspect)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/viadee/external-task-retry-aspect/Java%20CI)
 [![](https://img.shields.io/github/issues/viadee/external-task-retry-aspect)](https://github.com/viadee/external-task-retry-aspect/issues)
 [![](https://img.shields.io/github/stars/viadee/external-task-retry-aspect)](https://github.com/viadee/external-task-retry-aspect/stargazers)
 
@@ -30,7 +32,7 @@ a `spring-boot-starter`, the aspect will be loaded automatically as soon as the 
     <dependency>
         <groupId>de.viadee.bpm.camunda</groupId>
         <artifactId>external-task-retry-aspect-spring-boot-starter</artifactId>
-        <version>1.1.0</version>
+        <version>1.1.5</version>
     </dependency>
 </dependencies>
 ```
