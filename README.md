@@ -49,11 +49,15 @@ a `spring-boot-starter`, the aspect will be loaded automatically as soon as the 
 3. Make sure, the `ExternalTaskHandler` is capable to access extension-properties :
 ```java
 public class HandlerConfig {
+
+    @Autowired // e.g. spring component
+    private ExternalTaskHandler myExternalTaskHandler;
+    
     public void openHandler() {
         new ExternalTaskClientBuilderImpl()
                 .baseUrl("http://camunda/engine-rest").build()
                     .subscribe("worker-topic")
-                    .handler(myExternalTaskHandler)
+                    .handler(myExternalTaskHandler)   // injected spring component
                     .includeExtensionProperties(true) // important, bc. the default: false
                     .open();
     }
