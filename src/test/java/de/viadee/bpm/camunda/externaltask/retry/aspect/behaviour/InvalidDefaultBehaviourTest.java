@@ -37,7 +37,7 @@ import org.springframework.test.context.TestPropertySource;
 
 import static org.mockito.Mockito.when;
 
-@TestPropertySource(properties = "de.viadee.bpm.camunda.external-task.default-retry-time-cycle=R3/PT1D")
+@TestPropertySource(properties = "de.viadee.bpm.camunda.external-task.retry-config.defaults=R3/PT1D")
 public class InvalidDefaultBehaviourTest extends BaseTest {
 
 

@@ -38,7 +38,7 @@ import org.springframework.test.context.TestPropertySource;
 import static org.mockito.Mockito.when;
 
 
-@TestPropertySource(properties = "de.viadee.bpm.camunda.external-task.default-retry-config=R3/PT37M")
+@TestPropertySource(properties = "de.viadee.bpm.camunda.external-task.retry-config.default-behavior=R3/PT37M")
 public class InvalidRetryTimeCycleValuesTest extends BaseTest {
 
 
@@ -59,7 +59,7 @@ public class InvalidRetryTimeCycleValuesTest extends BaseTest {
     public void invalidTimeCycleDetectedByRegularExpression(final String retryTimeCycle) {
         // prepare
         when(this.externalTask.getRetries()).thenReturn(3);
-        when(this.externalTask.getExtensionProperty(this.properties.getRetryConfigName())).thenReturn(retryTimeCycle);
+        when(this.externalTask.getExtensionProperty(this.properties.getIdentifier())).thenReturn(retryTimeCycle);
 
         // test
         this.externalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException(), this.externalTask, this.externalTaskService);

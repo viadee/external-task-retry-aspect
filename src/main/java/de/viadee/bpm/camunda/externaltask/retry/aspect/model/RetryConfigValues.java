@@ -57,11 +57,11 @@ public final class RetryConfigValues {
     }
 
     public String getRetryConfigName() {
-        return this.properties.getRetryConfigName();
+        return this.properties.getIdentifier();
     }
 
     public String getDefaultRetryConfig() {
-        return this.properties.getDefaultRetryConfig();
+        return this.properties.getDefaultBehavior();
     }
 
     public Pattern getRetryListPattern() {
