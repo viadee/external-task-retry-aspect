@@ -41,19 +41,19 @@ public class ExternalTaskRetryAspectPropertiesTest {
     @Test
     public void propertiesShouldNotBeNullTest() {
         ExternalTaskRetryAspectProperties properties = new ExternalTaskRetryAspectProperties();
-        properties.setRetryConfigName(null);
-        properties.setDefaultRetryConfig(null);
-        assertEquals("R3/PT5M", properties.getDefaultRetryConfig());
-        assertEquals("RETRY_CONFIG", properties.getRetryConfigName());
+        properties.setIdentifier(null);
+        properties.setDefaultBehavior(null);
+        assertEquals("R3/PT5M", properties.getDefaultBehavior());
+        assertEquals("RETRY_CONFIG", properties.getIdentifier());
     }
 
 
     @Test
     public void propertiesShouldNotBeEmptyTest() {
         ExternalTaskRetryAspectProperties properties = new ExternalTaskRetryAspectProperties();
-        properties.setRetryConfigName("  ");
-        properties.setDefaultRetryConfig("  ");
-        assertEquals("R3/PT5M", properties.getDefaultRetryConfig());
-        assertEquals("RETRY_CONFIG", properties.getRetryConfigName());
+        properties.setIdentifier("  ");
+        properties.setDefaultBehavior("  ");
+        assertEquals("R3/PT5M", properties.getDefaultBehavior());
+        assertEquals("RETRY_CONFIG", properties.getIdentifier());
     }
 }
