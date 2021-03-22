@@ -36,31 +36,31 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.Objects;
 
 
-@ConfigurationProperties(prefix = "de.viadee.bpm.camunda.external-task")
+@ConfigurationProperties(prefix = "de.viadee.bpm.camunda.external-task.retry-config")
 public class ExternalTaskRetryAspectProperties {
 
     //@formatter:off
-    private String defaultRetryConfig  = "R3/PT5M";
-    private String retryConfigName     = "RETRY_CONFIG";
+    private String defaultBehavior    = "R3/PT5M";
+    private String identifier         = "RETRY_CONFIG";
     //@formatter:on
 
 
-    public String getDefaultRetryConfig() {
-        return this.defaultRetryConfig;
+    public String getDefaultBehavior() {
+        return this.defaultBehavior;
     }
 
-    public void setDefaultRetryConfig(final String defaultRetryConfig) {
-        if (Objects.isNull(defaultRetryConfig) || defaultRetryConfig.trim().isEmpty()) return;
-        this.defaultRetryConfig = defaultRetryConfig.replace(" ", "").toUpperCase();
+    public void setDefaultBehavior(final String defaultBehavior) {
+        if (Objects.isNull(defaultBehavior) || defaultBehavior.trim().isEmpty()) return;
+        this.defaultBehavior = defaultBehavior.replace(" ", "").toUpperCase();
     }
 
-    public String getRetryConfigName() {
-        return this.retryConfigName;
+    public String getIdentifier() {
+        return this.identifier;
     }
 
-    public void setRetryConfigName(final String retryConfigName) {
-        if (Objects.isNull(retryConfigName) || retryConfigName.trim().isEmpty()) return;
-        this.retryConfigName = retryConfigName;
+    public void setIdentifier(final String identifier) {
+        if (Objects.isNull(identifier) || identifier.trim().isEmpty()) return;
+        this.identifier = identifier;
     }
 
 }

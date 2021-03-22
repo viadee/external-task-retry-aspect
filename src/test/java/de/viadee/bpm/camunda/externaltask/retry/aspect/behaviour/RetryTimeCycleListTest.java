@@ -120,7 +120,7 @@ public class RetryTimeCycleListTest extends BaseTest {
     public void runTestAndReturnNextInterval(final Integer retries) {
         // prepare
         when(this.externalTask.getRetries()).thenReturn(retries); // 1. retry
-        when(this.externalTask.getExtensionProperty(this.properties.getRetryConfigName())).thenReturn(RETRY_CYCLE_LIST);
+        when(this.externalTask.getExtensionProperty(this.properties.getIdentifier())).thenReturn(RETRY_CYCLE_LIST);
 
         // test
         this.externalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException(), this.externalTask, this.externalTaskService);
