@@ -51,7 +51,7 @@
         <maven-javadoc.version>3.2.0</maven-javadoc.version>
         <maven-gpg.version>1.6</maven-gpg.version>
         <versions-maven.version>2.8.1</versions-maven.version>
-        <gitflow-maven.version>1.15.1</gitflow-maven.version>
+        <gitflow-maven.version>1.16.0</gitflow-maven.version>
 
     </properties>
 
