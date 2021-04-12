@@ -41,7 +41,7 @@
         <external-task-client.version>1.4.1</external-task-client.version>
         <commons-lang3.version>3.11</commons-lang3.version>
         <junit.version>4.13.2</junit.version>
-        <mockito.version>3.8.0</mockito.version>
+        <mockito.version>3.9.0</mockito.version>
 
         <!-- plugins -->
         <maven-release.version>3.0.0-M1</maven-release.version>
