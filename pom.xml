@@ -38,7 +38,7 @@
 
         <!-- versions -->
         <spring-boot.version>2.4.4</spring-boot.version>
-        <external-task-client.version>1.4.1</external-task-client.version>
+        <external-task-client.version>7.15.0</external-task-client.version>
         <commons-lang3.version>3.11</commons-lang3.version>
         <junit.version>4.13.2</junit.version>
         <mockito.version>3.8.0</mockito.version>
