@@ -32,7 +32,7 @@ a `spring-boot-starter`, the aspect will be loaded automatically as soon as the 
     <dependency>
         <groupId>de.viadee.bpm.camunda</groupId>
         <artifactId>external-task-retry-aspect-spring-boot-starter</artifactId>
-        <version>1.1.6</version>
+        <version>1.2.0</version>
     </dependency>
 </dependencies>
 ```
