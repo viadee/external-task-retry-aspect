@@ -31,6 +31,7 @@
  */
 package de.viadee.bpm.camunda.externaltask.retry.aspect.model;
 
+import com.sun.istack.internal.NotNull;
 import org.camunda.bpm.client.task.ExternalTask;
 
 import java.time.Duration;
@@ -87,14 +88,9 @@ public class RetryBehaviour {
         return this.nextRetryInterval(remainingRetries, this.retryConfig.getRetryProperty(), true);
     }
 
-    private long nextRetryInterval(final Integer remainingRetries, String retryProperty, final boolean tryDefault) {
+    private long nextRetryInterval(final Integer remainingRetries, @NotNull String retryProperty, final boolean tryDefault) {
         if (remainingRetries == null || remainingRetries == 0) {
             return 0L;
-        }
-
-        if (retryProperty == null || retryProperty.trim().isEmpty()) {
-            // if empty retry-config, start again using the default
-            return nextRetryInterval(remainingRetries, this.valueVault.getDefaultRetryConfig(), true);
         }
 
         retryProperty = retryProperty.replace(" ", "").toUpperCase();
