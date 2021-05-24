@@ -41,6 +41,7 @@ public final class InstantIncidentException extends RuntimeException {
      *
      */
     public InstantIncidentException() {
+        super();
     }
 
     /**
@@ -74,7 +75,7 @@ public final class InstantIncidentException extends RuntimeException {
      * @param cause root cause passed to the process
      */
     public InstantIncidentException(final Throwable cause) {
-        super(cause);
+        super(null, cause);
     }
 
 }

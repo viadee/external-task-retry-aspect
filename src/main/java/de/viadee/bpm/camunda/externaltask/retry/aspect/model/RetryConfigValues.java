@@ -40,7 +40,6 @@ public final class RetryConfigValues {
     //@formatter:off
     private static final long    FALLBACK_INTERVAL           = 5 * 60 * 1000L; // 5 minutes
     private static final String  FALLBACK_RETRY_CONFIG       = "R3/PT5M";
-    private static final String  FALLBACK_RETRY_CONFIG_NAME  = "RETRY_CONFIG";
 
     private static final String  RETRY_LIST_REGEX            = "^([Pp](?:\\d+[Dd])?(?:[Tt](?!$)(?:\\d+[Hh])?(?:\\d+[Mm])?(?:\\d+[Ss])?)?)(,([Pp](?:\\d+[Dd])?(?:[Tt](?!$)(?:\\d+[Hh])?(?:\\d+[Mm])?(?:\\d+[Ss])?)?))*$";
     private static final String  RETRY_CYCLE_REGEX           = "^(?:[Rr](?<times>\\d+)/)(?<interval>(?:[Pp](?:\\d+[Yy])?)(?:\\d+[Mm])?(?:\\d+[Dd])?(?:[Tt](?!$)(?:\\d+[Hh])?(?:\\d+[Mm])?(?:\\d+[Ss])?)?)$";
