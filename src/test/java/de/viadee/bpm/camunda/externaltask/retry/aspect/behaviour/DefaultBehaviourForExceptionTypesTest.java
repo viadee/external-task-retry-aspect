@@ -81,7 +81,7 @@ public class DefaultBehaviourForExceptionTypesTest extends BaseTest {
         this.verifyHandleFailure();
 
         // assert
-        this.assertErrorMessage(rootCause.getClass().getSimpleName() + ": " + rootCause.getMessage());
+        this.assertErrorMessage("RuntimeException: root-cause (InstantIncident: no-retries)");
         this.assertErrorDetails(rootCause);
         this.assertNextRetryInterval(0);
         this.assertNoRemainingRetries();
@@ -101,7 +101,7 @@ public class DefaultBehaviourForExceptionTypesTest extends BaseTest {
         this.verifyHandleFailure();
 
         // assert
-        this.assertErrorMessage("InstantIncidentException: null");
+        this.assertErrorMessage("InstantIncident");
         //this.assertErrorDetails(new InstantIncidentException());
         this.assertNextRetryInterval(0);
         this.assertNoRemainingRetries();
@@ -120,7 +120,7 @@ public class DefaultBehaviourForExceptionTypesTest extends BaseTest {
         this.verifyHandleFailure();
 
         // assert
-        this.assertErrorMessage("RuntimeException: null");
+        this.assertErrorMessage("RuntimeException: null (InstantIncident)");
         this.assertErrorDetails(instantIncidentException.getCause());
         this.assertNextRetryInterval(0);
         this.assertNoRemainingRetries();
@@ -140,7 +140,7 @@ public class DefaultBehaviourForExceptionTypesTest extends BaseTest {
         this.verifyHandleFailure();
 
         // assert
-        this.assertErrorMessage("InstantIncidentException: instant-incident-no-retries-plz");
+        this.assertErrorMessage("InstantIncident: instant-incident-no-retries-plz");
         this.assertErrorDetails(instantIncidentException);
         this.assertNextRetryInterval(0);
         this.assertNoRemainingRetries();

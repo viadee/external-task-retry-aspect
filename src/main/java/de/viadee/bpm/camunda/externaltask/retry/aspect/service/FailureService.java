@@ -40,6 +40,9 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Objects;
 
+import static java.lang.String.format;
+import static java.util.Objects.isNull;
+
 
 public class FailureService {
 
@@ -79,12 +82,44 @@ public class FailureService {
     }
 
 
-    private String getErrorMessage(final Throwable throwable) {
-        if (throwable instanceof InstantIncidentException && Objects.nonNull(throwable.getCause())) {
-            // if instant-incident, probably root cause is more relevant
-            return this.getErrorMessage(throwable.getCause());
+    private String getErrorMessage(final Throwable exception) {
+
+        if (!(exception instanceof InstantIncidentException)) {
+            // AnotherTypeException() -> "AnotherType: another-message"
+            return exception.getClass().getSimpleName() + ": " + exception.getMessage();
         }
-        return throwable.getClass().getSimpleName() + ": " + throwable.getMessage();
+
+        if (isNull(exception.getMessage())) { // no message
+
+            if (isNull(exception.getCause())) {
+                // no root-cause: InstantIncidentException()
+                // -> InstantIncident
+                return "InstantIncident";
+
+            } else {
+                // with root-cause: InstantIncidentException(cause)
+                // -> CauseType: cause-message (InstantIncident)
+                return format("%s: %s (InstantIncident)",
+                        exception.getCause().getClass().getSimpleName(),
+                        exception.getCause().getMessage());
+            }
+
+        } else { // with message
+
+            if (isNull(exception.getCause())) {
+                // no root-cause: InstantIncidentException("message")
+                // -> InstantIncident: message
+                return "InstantIncident: " + exception.getMessage();
+
+            } else {
+                // with root-cause InstantIncidentException("message", cause)
+                // -> CauseType: cause-message (InstantIncident: message)
+                return format("%s: %s (InstantIncident: %s)",
+                        exception.getCause().getClass().getSimpleName(),
+                        exception.getCause().getMessage(),
+                        exception.getMessage());
+            }
+        }
     }
 
 
@@ -102,10 +137,10 @@ public class FailureService {
 
     private void logFailure(final Class<?> origin, final Throwable throwable, final int remainingRetries, final Long nextRetryInterval) {
         // log remaining time only if retries > 0
-        final String millisIfRemainingRetry = String.format("%s", (remainingRetries == 0) ? "" : ", next retry in " + nextRetryInterval + "ms");
+        final String millisIfRemainingRetry = format("%s", (remainingRetries == 0) ? "" : ", next retry in " + nextRetryInterval + "ms");
 
         final String errorLogString =
-                String.format("%s: %s. There are %s retry(s) left%s",
+                format("%s: %s. There are %s retry(s) left%s",
                         throwable.getClass().getSimpleName(),
                         throwable.getMessage(),
                         remainingRetries,

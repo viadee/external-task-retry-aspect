@@ -92,11 +92,6 @@ public class RetryBehaviour {
             return 0L;
         }
 
-        if (retryProperty == null || retryProperty.trim().isEmpty()) {
-            // if empty retry-config, start again using the default
-            return nextRetryInterval(remainingRetries, this.valueVault.getDefaultRetryConfig(), true);
-        }
-
         retryProperty = retryProperty.replace(" ", "").toUpperCase();
 
         Matcher retryListMatcher = this.valueVault.getRetryListPattern().matcher(retryProperty);
