@@ -41,6 +41,7 @@ public final class InstantIncidentException extends RuntimeException {
      *
      */
     public InstantIncidentException() {
+        super();
     }
 
     /**
