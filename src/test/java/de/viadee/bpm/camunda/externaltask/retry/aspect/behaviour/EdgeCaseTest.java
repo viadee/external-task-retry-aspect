@@ -88,4 +88,25 @@ public class EdgeCaseTest extends BaseTest {
         this.assertNextRetryInterval(5 * MINUTES_TO_MILLIS);
     }
 
+
+    @Test
+    public void noRetryBehaviour() {
+        // prepare
+        when(this.externalTask.getRetries()).thenReturn(null);
+        when(this.externalTask
+                .getExtensionProperty(this.properties.getIdentifier()))
+                    .thenReturn("R0/PT2M");
+
+        // test
+        this.externalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException("test"), this.externalTask, this.externalTaskService);
+
+        // verify
+        this.verifyNoBpmnErrorAtAll();
+        this.verifyHandleFailure();
+
+        // assert
+        this.assertRemainingRetries(0);
+        this.assertNextRetryInterval(0);
+    }
+
 }
