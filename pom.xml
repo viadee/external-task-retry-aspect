@@ -48,7 +48,7 @@
         <maven-source.version>3.2.1</maven-source.version>
         <maven-compiler.version>3.8.1</maven-compiler.version>
         <license-maven.version>4.1</license-maven.version>
-        <maven-javadoc.version>3.3.0</maven-javadoc.version>
+        <maven-javadoc.version>3.3.1</maven-javadoc.version>
         <maven-gpg.version>3.0.1</maven-gpg.version>
         <versions-maven.version>2.8.1</versions-maven.version>
         <gitflow-maven.version>1.16.0</gitflow-maven.version>
