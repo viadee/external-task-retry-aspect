@@ -1,16 +1,17 @@
 # external-task-retry-aspect
 [![](https://img.shields.io/maven-central/v/de.viadee.bpm.camunda/external-task-retry-aspect-spring-boot-starter)](https://search.maven.org/artifact/de.viadee.bpm.camunda/external-task-retry-aspect-spring-boot-starter)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/viadee/external-task-retry-aspect)
+[![](https://img.shields.io/badge/External%20Task%20Handler-7.15.0-orange.svg)](https://docs.camunda.org/manual/7.15/user-guide/ext-client/spring-boot-starter)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/viadee/external-task-retry-aspect/Java%20CI)
 [![](https://img.shields.io/github/issues/viadee/external-task-retry-aspect)](https://github.com/viadee/external-task-retry-aspect/issues)
 [![](https://img.shields.io/github/stars/viadee/external-task-retry-aspect)](https://github.com/viadee/external-task-retry-aspect/stargazers)
 
-## Description
+## ℹ️ Description
 This tool helps to control the retry-behaviour in external-task-handlers based on the
 official [java-client](https://docs.camunda.org/manual/latest/user-guide/ext-client/) provided
 by [Camunda BPM](https://docs.camunda.org/manual/latest/user-guide/ext-client/).
 
-## Features
+## ⭐ Features
 * Retry-behaviour for external-tasks can be configured in process-models as known from `JavaDelegates`
   like `R3/PT1M`, meaning *three times each after one minute*
 * Every `Exception` leads to a retry  - no manual handling within handlers necessary
@@ -18,21 +19,31 @@ by [Camunda BPM](https://docs.camunda.org/manual/latest/user-guide/ext-client/).
 * Additional error-type to create a business-error, which must be handled in process
 * Configurable default retry-behaviour
 
-## How to use
+## 🚀 How to use
 1. Besides the `camunda-external-task-client` dependency, the following maven-coordinate needs to be added to the `pom.xml`. As
 a `spring-boot-starter`, the aspect will be loaded automatically as soon as the handler-application starts:
 ```xml
 <dependencies>
+  
+    <!-- works either with the original external-task-client... -->
     <dependency>
         <groupId>org.camunda.bpm</groupId>
         <artifactId>camunda-external-task-client</artifactId>
-        <version>{external-task-client.version}</version>
+        <version>...</version>
+    </dependency>
+    
+    <!-- ...or with new spring-boot-starter-external-task-client since version 7.15.0 -->
+    <dependency>
+        <groupId>org.camunda.bpm.springboot</groupId>
+        <artifactId>camunda-bpm-spring-boot-starter-external-task-client</artifactId>
+        <version>...</version>
     </dependency>
 
+    <!-- finally: the retry-aspect itself  -->
     <dependency>
         <groupId>de.viadee.bpm.camunda</groupId>
         <artifactId>external-task-retry-aspect-spring-boot-starter</artifactId>
-        <version>1.2.0</version>
+        <version>...</version>
     </dependency>
 </dependencies>
 ```
@@ -63,6 +74,13 @@ public class HandlerConfig {
     }
 }
 ```
+Alternatively, if using `spring-boot-starter-external-task-client`, activate extension-properties e.g. in the application.yaml ([more information](https://docs.camunda.org/manual/latest/user-guide/ext-client/spring-boot-starter/)):
+```yaml
+camunda.bpm.client:
+  subscriptions: 
+    worker-topic:
+      include-extension-properties: true
+```
 ### Configuration options
 These properties are available, they can be set e.g. in `application.properties`:
 
@@ -75,15 +93,15 @@ de.viadee.bpm.camunda.external-task.default-retry-config=R3/PT5M
 de.viadee.bpm.camunda.external-task.retry-config-name=RETRY_CONFIG
 ```
 
-## How this might help?
+## 🧙 How this might help?
 A comparison of some `ConventionalHandler` with an `AspectedHandler` explains how the error-handling 
 can be completely left out, because anything is done by the `retry-aspect`:
 
 ### `ConventionalHandler` without retry-aspect
 ```java
+@Component
 public class ConventionalHandler implements ExternalTaskHandler {
 
-    @Override
     public void execute(ExternalTask task, ExternalTaskService service) {
         try {
             // do some business-logic and complete if fine...
@@ -112,9 +130,10 @@ public class ConventionalHandler implements ExternalTaskHandler {
 * `InstantIncidentException` can be used to skip retries and create an incident instantly
 
 ```java
+@Component
+@ExternalTaskSubscription("my-topic")
 public class AspectedHandler implements ExternalTaskHandler {
 
-    @Override
     public void execute(ExternalTask task, ExternalTaskService service) {
         // do some business-logic and complete if fine...
         service.complete(task);
@@ -125,15 +144,15 @@ public class AspectedHandler implements ExternalTaskHandler {
 }
 ```
 
-## Collaboration
+## 🤹 Collaboration
 This tool was build by viadee Unternehmensberatung AG. If you are interested to find out what 
 else we are doing, check out our website [viadee.de](https://www.viadee.de/en). 
 If you have any feedback, ideas or extensions feel free to contact or create a GitHub issue.
 
-## Contact
+## 📫 Contact
 
 [![rnschk](https://img.shields.io/twitter/follow/rnschk.svg)](https://twitter.com/rnschk)
 
-## License
+## 🔑 License
 
 [![](https://img.shields.io/github/license/viadee/external-task-retry-aspect)](https://github.com/viadee/external-task-retry-aspect/blob/master/LICENSE)
