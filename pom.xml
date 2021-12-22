@@ -37,7 +37,7 @@
         <maven.compiler.target>8</maven.compiler.target>
 
         <!-- versions -->
-        <spring-boot.version>2.5.4</spring-boot.version>
+        <spring-boot.version>2.5.7</spring-boot.version>
         <external-task-client.version>7.15.0</external-task-client.version>
         <commons-lang3.version>3.11</commons-lang3.version>
         <junit.version>4.13.2</junit.version>
