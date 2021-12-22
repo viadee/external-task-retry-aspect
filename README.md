@@ -1,7 +1,7 @@
 # external-task-retry-aspect
 [![](https://img.shields.io/maven-central/v/de.viadee.bpm.camunda/external-task-retry-aspect-spring-boot-starter)](https://search.maven.org/artifact/de.viadee.bpm.camunda/external-task-retry-aspect-spring-boot-starter)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/viadee/external-task-retry-aspect)
-[![](https://img.shields.io/badge/External%20Task%20Handler-7.15.0-orange.svg)](https://docs.camunda.org/manual/7.15/user-guide/ext-client/spring-boot-starter)
+[![](https://img.shields.io/badge/External%20Task%20Handler-7.16.0-orange.svg)](https://docs.camunda.org/manual/7.16/user-guide/ext-client/spring-boot-starter)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/viadee/external-task-retry-aspect/Java%20CI)
 [![](https://img.shields.io/github/issues/viadee/external-task-retry-aspect)](https://github.com/viadee/external-task-retry-aspect/issues)
 [![](https://img.shields.io/github/stars/viadee/external-task-retry-aspect)](https://github.com/viadee/external-task-retry-aspect/stargazers)
@@ -97,7 +97,7 @@ de.viadee.bpm.camunda.external-task.retry-config-name=RETRY_CONFIG
 A comparison of some `ConventionalHandler` with an `AspectedHandler` explains how the error-handling 
 can be completely left out, because anything is done by the `retry-aspect`:
 
-### `ConventionalHandler` without retry-aspect
+### `ConventionalHandler` without Retry-Aspect
 ```java
 @Component
 public class ConventionalHandler implements ExternalTaskHandler {
@@ -123,7 +123,7 @@ public class ConventionalHandler implements ExternalTaskHandler {
 
 ```
 
-### `AspectedHandler` using retry-aspect
+### `AspectedHandler` using Retry-Aspect
 
 * No `try-catch` needed, this is done automatically
 * `ExternalTaskBusinessError` can be used to trigger `handleBpmnError()`
@@ -143,6 +143,17 @@ public class AspectedHandler implements ExternalTaskHandler {
     }
 }
 ```
+
+## :computer: Versions
+The following versions are used. Older versions are probably not maintained, but in most cases, it should be possible to 
+use a newer version of the Retry-Aspect in combination with an older version of the External-Task-Client. If you encounter
+any issue, please feel free to contact me.
+
+| Retry-Aspect | External-Task-Client | Spring Boot |  
+| ---: | ---: | ---: |
+| 1.2.x | 7.15.0 | 2.5.x |
+| 1.3.x | 7.16.0 | 2.6.x |
+| 1.4.x | 7.17.0 | 2.6.x |
 
 ## 🤹 Collaboration
 This tool was build by viadee Unternehmensberatung AG. If you are interested to find out what 
