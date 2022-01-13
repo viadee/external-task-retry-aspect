@@ -44,7 +44,7 @@
         <mockito.version>4.2.0</mockito.version>
 
         <!-- plugins -->
-        <maven-release.version>3.0.0-M4</maven-release.version>
+        <maven-release.version>3.0.0-M5</maven-release.version>
         <maven-source.version>3.2.1</maven-source.version>
         <maven-compiler.version>3.8.1</maven-compiler.version>
         <license-maven.version>4.1</license-maven.version>
