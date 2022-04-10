@@ -87,10 +87,10 @@ These properties are available, they can be set e.g. in `application.properties`
 ```properties
 # Default retry-behaviour, if no retry is configured. 
 # Whenever this property is configured incorrectly, 'R3/PT5M' is also used as fallback
-de.viadee.bpm.camunda.external-task.default-retry-config=R3/PT5M
+de.viadee.bpm.camunda.external-task.retry-config.default-behavior=R3/PT5M
 
 # Identifier used in bpmn-extension-properties, default=RETRY_CONFIG
-de.viadee.bpm.camunda.external-task.retry-config-name=RETRY_CONFIG
+de.viadee.bpm.camunda.external-task.retry-config.identifier=RETRY_CONFIG
 ```
 
 ## 🧙 How this might help?
