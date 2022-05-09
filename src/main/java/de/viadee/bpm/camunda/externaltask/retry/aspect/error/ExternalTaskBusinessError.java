@@ -36,7 +36,7 @@ import org.camunda.bpm.client.task.ExternalTaskService;
 import java.util.Map;
 import java.util.Objects;
 
-public final class ExternalTaskBusinessError extends RuntimeException {
+public class ExternalTaskBusinessError extends RuntimeException {
 
     private String errorCode;
     private String errorMessage;
