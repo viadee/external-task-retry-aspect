@@ -148,6 +148,26 @@ public class DefaultBehaviourForExceptionTypesTest extends BaseTest {
 
 
     @Test
+    public void instantCustomIncidentException() {
+        RuntimeException rootCause = new RuntimeException("root-cause");
+        CustomTestInstantErrorType customError = new CustomTestInstantErrorType("instant-custom-incident", rootCause);
+        this.externalTaskRetryAspect
+                .handleErrorAfterThrown(this.joinPoint, customError,
+                        this.externalTask, this.externalTaskService);
+
+        // verify
+        this.verifyNoBpmnErrorAtAll();
+        this.verifyHandleFailure();
+
+        // assert
+        this.assertErrorMessage("RuntimeException: root-cause (InstantIncident: instant-custom-incident)");
+        this.assertErrorDetails(rootCause);
+        this.assertNextRetryInterval(0);
+        this.assertNoRemainingRetries();
+    }
+
+
+    @Test
     public void emptyBpmBusinessException() {
         this.externalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new ExternalTaskBusinessError(), this.externalTask, this.externalTaskService);
 
@@ -204,6 +224,19 @@ public class DefaultBehaviourForExceptionTypesTest extends BaseTest {
         assertEquals(2, this.errorVariables.getValue().size());
         assertEquals("vader", this.errorVariables.getValue().get("darth"));
         assertEquals(2, this.errorVariables.getValue().get("r2d"));
+    }
+
+    @Test
+    public void bpmCustomBusinessException() {
+        final CustomTestBusinessErrorType customBusinessError = new CustomTestBusinessErrorType("custom-code");
+        this.externalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, customBusinessError, this.externalTask, this.externalTaskService);
+
+        // verify
+        this.verifyNoFailure();
+        this.verifyBpmnErrorWithoutVariables();
+
+        // assert
+        this.assertBpmnErrorCode("custom-code");
     }
 
 }
