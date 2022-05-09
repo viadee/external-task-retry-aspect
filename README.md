@@ -1,7 +1,7 @@
 # external-task-retry-aspect
 [![](https://img.shields.io/maven-central/v/de.viadee.bpm.camunda/external-task-retry-aspect-spring-boot-starter)](https://search.maven.org/artifact/de.viadee.bpm.camunda/external-task-retry-aspect-spring-boot-starter)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/viadee/external-task-retry-aspect)
-[![](https://img.shields.io/badge/External%20Task%20Handler-7.16.0-orange.svg)](https://docs.camunda.org/manual/7.16/user-guide/ext-client/spring-boot-starter)
+[![](https://img.shields.io/badge/External%20Task%20Handler-7.17.0-orange.svg)](https://docs.camunda.org/manual/7.17/user-guide/ext-client/spring-boot-starter)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/viadee/external-task-retry-aspect/Java%20CI)
 [![](https://img.shields.io/github/issues/viadee/external-task-retry-aspect)](https://github.com/viadee/external-task-retry-aspect/issues)
 [![](https://img.shields.io/github/stars/viadee/external-task-retry-aspect)](https://github.com/viadee/external-task-retry-aspect/stargazers)
