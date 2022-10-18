@@ -150,10 +150,11 @@ use a newer version of the Retry-Aspect in combination with an older version of 
 any issue, please feel free to contact me.
 
 | Retry-Aspect | External-Task-Client | Spring Boot |  
-| ---: | ---: | ---: |
-| 1.2.x | 7.15.0 | 2.5.x |
-| 1.3.x | 7.16.0 | 2.6.x |
-| 1.4.x | 7.17.0 | 2.6.x |
+|-------------:| ---: |------------:|
+|        1.2.x | 7.15.0 |       2.5.x |
+|        1.3.x | 7.16.0 |       2.6.x |
+|        1.4.x | 7.17.0 |       2.6.x |
+|        1.4.2 | 7.17.0 |       2.7.x |
 
 ## 🤹 Collaboration
 This tool was build by viadee Unternehmensberatung AG. If you are interested to find out what 
