@@ -125,9 +125,10 @@ public class ConventionalHandler implements ExternalTaskHandler {
 
 ### `AspectedHandler` using Retry-Aspect
 
-* No `try-catch` needed, this is done automatically
-* `ExternalTaskBusinessError` can be used to trigger `handleBpmnError()`
-* `InstantIncidentException` can be used to skip retries and create an incident instantly
+* No `try-catch` needed, this is done automatically, i.e. all errors thrown in an `ExternalTaskHandler` `execute()`-method will be caught automatically and handled as follows:
+    * `ExternalTaskBusinessError` can be used to trigger `handleBpmnError()`
+    * `InstantIncidentException` can be used to skip retries and create an incident instantly
+    * Any other exception leads to the specified retry-behaviour
 
 ```java
 @Component
