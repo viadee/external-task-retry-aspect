@@ -50,7 +50,7 @@
         <license-maven.version>4.1</license-maven.version>
         <maven-javadoc.version>3.4.1</maven-javadoc.version>
         <maven-gpg.version>3.0.1</maven-gpg.version>
-        <versions-maven.version>2.13.0</versions-maven.version>
+        <versions-maven.version>2.14.1</versions-maven.version>
         <gitflow-maven.version>1.19.0</gitflow-maven.version>
 
     </properties>
