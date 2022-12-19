@@ -1,4 +1,4 @@
-name: Release Artifact
+name: Maven Release
 
 on:
   release:

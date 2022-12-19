@@ -10,7 +10,7 @@
     <description>This tool helps to control the retry-behaviour in external-task-handlers
         based on the official java-client provided by Camunda BPM
     </description>
-    <version>1.5.2</version>
+    <version>1.5.3</version>
     <inceptionYear>2021</inceptionYear>
 
     <organization>
@@ -41,7 +41,7 @@
         <external-task-client.version>7.18.0</external-task-client.version>
         <commons-lang3.version>3.11</commons-lang3.version>
         <junit.version>4.13.2</junit.version>
-        <mockito.version>4.9.0</mockito.version>
+        <mockito.version>4.10.0</mockito.version>
 
         <!-- plugins -->
         <maven-release.version>3.0.0-M7</maven-release.version>
@@ -50,7 +50,7 @@
         <license-maven.version>4.1</license-maven.version>
         <maven-javadoc.version>3.4.1</maven-javadoc.version>
         <maven-gpg.version>3.0.1</maven-gpg.version>
-        <versions-maven.version>2.13.0</versions-maven.version>
+        <versions-maven.version>2.14.1</versions-maven.version>
         <gitflow-maven.version>1.19.0</gitflow-maven.version>
 
     </properties>
