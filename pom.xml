@@ -37,20 +37,20 @@
         <maven.compiler.target>8</maven.compiler.target>
 
         <!-- versions -->
-        <spring-boot.version>2.7.5</spring-boot.version>
-        <external-task-client.version>7.18.0</external-task-client.version>
+        <spring-boot.version>2.7.10</spring-boot.version>
+        <external-task-client.version>7.19.0</external-task-client.version>
         <commons-lang3.version>3.11</commons-lang3.version>
         <junit.version>4.13.2</junit.version>
         <mockito.version>4.10.0</mockito.version>
 
         <!-- plugins -->
-        <maven-release.version>3.0.0-M7</maven-release.version>
+        <maven-release.version>3.0.0</maven-release.version>
         <maven-source.version>3.2.1</maven-source.version>
-        <maven-compiler.version>3.10.1</maven-compiler.version>
-        <license-maven.version>4.1</license-maven.version>
-        <maven-javadoc.version>3.4.1</maven-javadoc.version>
+        <maven-compiler.version>3.11.0</maven-compiler.version>
+        <license-maven.version>4.2</license-maven.version>
+        <maven-javadoc.version>3.5.0</maven-javadoc.version>
         <maven-gpg.version>3.0.1</maven-gpg.version>
-        <versions-maven.version>2.14.1</versions-maven.version>
+        <versions-maven.version>2.15.0</versions-maven.version>
         <gitflow-maven.version>1.19.0</gitflow-maven.version>
 
     </properties>
