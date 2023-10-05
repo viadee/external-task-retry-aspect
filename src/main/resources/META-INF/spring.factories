@@ -1,2 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  de.viadee.bpm.camunda.externaltask.retry.aspect.config.ExternalTaskRetryAspectAutoConfiguration
