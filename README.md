@@ -158,11 +158,16 @@ any issue, please feel free to contact me.
 |        1.4.2 |               7.17.0 |       2.7.x |
 |        1.5.x |               7.18.0 |       2.7.x |
 |        1.6.x |               7.19.0 |       2.7.x |
+|        1.7.x |               7.19.0 |       2.7.x |
 
 ## 🤹 Collaboration
 This tool was build by viadee Unternehmensberatung AG. If you are interested to find out what 
 else we are doing, check out our website [viadee.de](https://www.viadee.de/en). 
 If you have any feedback, ideas or extensions feel free to contact or create a GitHub issue.
+
+## 🏆 Thanks
+
+* Many thanks to [@ChrisSchoe][u_chrisschoe] for making the external-task-retry-aspect spring-boot-3-ready ([#107][i107])
 
 ## 📫 Contact
 
@@ -171,3 +176,7 @@ If you have any feedback, ideas or extensions feel free to contact or create a G
 ## 🔑 License
 
 [![](https://img.shields.io/github/license/viadee/external-task-retry-aspect)](https://github.com/viadee/external-task-retry-aspect/blob/master/LICENSE)
+
+---  
+[i107]: https://github.com/viadee/external-task-retry-aspect/issues/107
+[u_ChrisSchoe]: https://github.com/ChrisSchoe
