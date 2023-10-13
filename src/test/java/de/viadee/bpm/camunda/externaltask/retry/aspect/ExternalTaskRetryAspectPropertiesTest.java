@@ -32,9 +32,10 @@
 package de.viadee.bpm.camunda.externaltask.retry.aspect;
 
 import de.viadee.bpm.camunda.externaltask.retry.aspect.config.ExternalTaskRetryAspectProperties;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class ExternalTaskRetryAspectPropertiesTest {
 
