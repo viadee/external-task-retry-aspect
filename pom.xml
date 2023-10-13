@@ -10,7 +10,7 @@
     <description>This tool helps to control the retry-behaviour in external-task-handlers
         based on the official java-client provided by Camunda BPM
     </description>
-    <version>1.7.1</version>
+    <version>1.8.0</version>
     <inceptionYear>2021</inceptionYear>
 
     <organization>
@@ -32,26 +32,26 @@
 
     <properties>
         <!-- settings -->
-        <java.version>1.8</java.version>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <java.version>17</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <!-- versions -->
-        <spring-boot.version>2.7.11</spring-boot.version>
-        <external-task-client.version>7.19.0</external-task-client.version>
+        <spring-boot.version>3.1.4</spring-boot.version>
+        <external-task-client.version>7.20.0</external-task-client.version>
         <commons-lang3.version>3.11</commons-lang3.version>
-        <junit.version>4.13.2</junit.version>
+        <junit-jupiter.version>5.10.0</junit-jupiter.version>
         <mockito.version>4.10.0</mockito.version>
 
         <!-- plugins -->
-        <maven-release.version>3.0.0</maven-release.version>
-        <maven-source.version>3.2.1</maven-source.version>
+        <maven-release.version>3.0.1</maven-release.version>
+        <maven-source.version>3.3.0</maven-source.version>
         <maven-compiler.version>3.11.0</maven-compiler.version>
         <license-maven.version>4.2</license-maven.version>
         <maven-javadoc.version>3.5.0</maven-javadoc.version>
-        <maven-gpg.version>3.0.1</maven-gpg.version>
+        <maven-gpg.version>3.1.0</maven-gpg.version>
         <versions-maven.version>2.15.0</versions-maven.version>
-        <gitflow-maven.version>1.19.0</gitflow-maven.version>
+        <gitflow-maven.version>1.20.0</gitflow-maven.version>
 
     </properties>
 
@@ -100,9 +100,9 @@
         </dependency>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-jupiter.version}</version>
             <scope>test</scope>
         </dependency>
 

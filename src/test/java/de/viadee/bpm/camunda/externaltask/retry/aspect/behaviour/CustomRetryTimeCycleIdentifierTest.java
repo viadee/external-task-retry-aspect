@@ -32,10 +32,10 @@
 package de.viadee.bpm.camunda.externaltask.retry.aspect.behaviour;
 
 import de.viadee.bpm.camunda.externaltask.retry.aspect.BaseTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.test.context.TestPropertySource;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 @TestPropertySource(properties = "de.viadee.bpm.camunda.external-task.retry-config.identifier=CUSTOM_SOMETHING")

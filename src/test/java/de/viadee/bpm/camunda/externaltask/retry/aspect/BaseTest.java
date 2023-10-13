@@ -36,14 +36,14 @@ import de.viadee.bpm.camunda.externaltask.retry.aspect.config.ExternalTaskRetryA
 import org.aspectj.lang.JoinPoint;
 import org.camunda.bpm.client.task.ExternalTask;
 import org.camunda.bpm.client.task.ExternalTaskService;
-import org.junit.Before;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -60,7 +60,7 @@ import static org.mockito.Mockito.mock;
 @SuppressWarnings({"unchecked", "rawtypes"})
 @ContextConfiguration(classes = {ExternalTaskRetryAspectAutoConfiguration.class})
 @ActiveProfiles("test")
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 public abstract class BaseTest {
 
     //@formatter:off
@@ -87,7 +87,7 @@ public abstract class BaseTest {
     protected ExternalTaskRetryAspectProperties properties;
 
 
-    @Before
+    @BeforeEach
     public void initTestData() {
         Mockito.reset(this.externalTask, this.externalTaskService, this.joinPoint);
         Mockito.when(this.joinPoint.getTarget()).thenReturn(Object.class);
