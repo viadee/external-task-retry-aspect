@@ -27,7 +27,7 @@ jobs:
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
       - name: Publish package
-        run: mvn clean source:jar javadoc:jar deploy --batch-mode
+        run: mvn clean package source:jar javadoc:jar deploy --batch-mode
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
