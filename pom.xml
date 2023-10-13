@@ -47,6 +47,7 @@
         <maven-release.version>3.0.1</maven-release.version>
         <maven-source.version>3.3.0</maven-source.version>
         <maven-compiler.version>3.11.0</maven-compiler.version>
+        <maven-surefire.version>3.1.2</maven-surefire.version>
         <license-maven.version>4.2</license-maven.version>
         <maven-javadoc.version>3.5.0</maven-javadoc.version>
         <maven-gpg.version>3.1.0</maven-gpg.version>
@@ -191,6 +192,12 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire.version}</version>
             </plugin>
 
             <plugin>
