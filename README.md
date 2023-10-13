@@ -1,7 +1,7 @@
 # external-task-retry-aspect
 [![](https://img.shields.io/maven-central/v/de.viadee.bpm.camunda/external-task-retry-aspect-spring-boot-starter)](https://search.maven.org/artifact/de.viadee.bpm.camunda/external-task-retry-aspect-spring-boot-starter)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/viadee/external-task-retry-aspect)
-[![](https://img.shields.io/badge/External%20Task%20Handler-7.19.0-orange.svg)](https://docs.camunda.org/manual/7.19/user-guide/ext-client/spring-boot-starter)
+[![](https://img.shields.io/badge/External%20Task%20Handler-7.20.0-orange.svg)](https://docs.camunda.org/manual/7.20/user-guide/ext-client/spring-boot-starter)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/viadee/external-task-retry-aspect/maven-build.yml)
 [![](https://img.shields.io/github/issues/viadee/external-task-retry-aspect)](https://github.com/viadee/external-task-retry-aspect/issues)
 [![](https://img.shields.io/github/stars/viadee/external-task-retry-aspect)](https://github.com/viadee/external-task-retry-aspect/stargazers)
@@ -159,6 +159,7 @@ any issue, please feel free to contact me.
 |        1.5.x |               7.18.0 |       2.7.x |
 |        1.6.x |               7.19.0 |       2.7.x |
 |        1.7.x |               7.19.0 |       2.7.x |
+|        1.8.x |               7.20.0 |       3.1.x |
 
 ## 🤹 Collaboration
 This tool was build by viadee Unternehmensberatung AG. If you are interested to find out what 
@@ -168,10 +169,6 @@ If you have any feedback, ideas or extensions feel free to contact or create a G
 ## 🏆 Thanks
 
 * Many thanks to [@ChrisSchoe][u_chrisschoe] for making the external-task-retry-aspect spring-boot-3-ready ([#107][i107])
-
-## 📫 Contact
-
-[![rnschk](https://img.shields.io/twitter/follow/rnschk.svg)](https://twitter.com/rnschk)
 
 ## 🔑 License
 
