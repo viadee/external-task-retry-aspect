@@ -36,7 +36,7 @@ import de.viadee.bpm.camunda.externaltask.retry.aspect.error.ExternalTaskBusines
 import de.viadee.bpm.camunda.externaltask.retry.aspect.error.InstantIncidentException;
 import org.camunda.bpm.engine.variable.VariableMap;
 import org.camunda.bpm.engine.variable.Variables;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
