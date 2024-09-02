@@ -47,7 +47,7 @@
         <maven-release.version>3.1.1</maven-release.version>
         <maven-source.version>3.2.1</maven-source.version>
         <maven-compiler.version>3.13.0</maven-compiler.version>
-        <maven-surefire.version>3.4.0</maven-surefire.version>
+        <maven-surefire.version>3.5.0</maven-surefire.version>
         <license-maven.version>4.5</license-maven.version>
         <maven-javadoc.version>3.8.0</maven-javadoc.version>
         <maven-gpg.version>3.2.5</maven-gpg.version>
