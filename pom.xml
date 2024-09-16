@@ -50,7 +50,7 @@
         <maven-surefire.version>3.5.0</maven-surefire.version>
         <license-maven.version>4.5</license-maven.version>
         <maven-javadoc.version>3.10.0</maven-javadoc.version>
-        <maven-gpg.version>3.2.5</maven-gpg.version>
+        <maven-gpg.version>3.2.6</maven-gpg.version>
         <versions-maven.version>2.17.1</versions-maven.version>
         <gitflow-maven.version>1.21.0</gitflow-maven.version>
 
