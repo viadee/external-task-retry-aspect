@@ -10,7 +10,7 @@
     <description>This tool helps to control the retry-behaviour in external-task-handlers
         based on the official java-client provided by Camunda BPM
     </description>
-    <version>1.9.0</version>
+    <version>1.9.1</version>
     <inceptionYear>2021</inceptionYear>
 
     <organization>
@@ -25,7 +25,7 @@
             <name>Florian Runschke</name>
             <email>florian.runschke@viadee.de</email>
             <organization>viadee Unternehmensberatung AG</organization>
-            <organizationUrl>http://www.viadee.de</organizationUrl>
+            <organizationUrl>https://www.viadee.de</organizationUrl>
         </developer>
     </developers>
 
@@ -37,20 +37,20 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <!-- versions -->
-        <spring-boot.version>3.3.2</spring-boot.version>
-        <external-task-client.version>7.21.0</external-task-client.version>
+        <spring-boot.version>3.3.9</spring-boot.version>
+        <external-task-client.version>7.22.0</external-task-client.version>
         <commons-lang3.version>3.15.0</commons-lang3.version>
-        <junit-jupiter.version>5.10.3</junit-jupiter.version>
-        <mockito.version>5.12.0</mockito.version>
+        <junit-jupiter.version>5.11.2</junit-jupiter.version>
+        <mockito.version>5.15.2</mockito.version>
 
         <!-- plugins -->
         <maven-release.version>3.1.1</maven-release.version>
         <maven-source.version>3.2.1</maven-source.version>
         <maven-compiler.version>3.13.0</maven-compiler.version>
-        <maven-surefire.version>3.3.1</maven-surefire.version>
+        <maven-surefire.version>3.5.1</maven-surefire.version>
         <license-maven.version>4.5</license-maven.version>
-        <maven-javadoc.version>3.8.0</maven-javadoc.version>
-        <maven-gpg.version>3.2.4</maven-gpg.version>
+        <maven-javadoc.version>3.11.2</maven-javadoc.version>
+        <maven-gpg.version>3.2.7</maven-gpg.version>
         <versions-maven.version>2.17.1</versions-maven.version>
         <gitflow-maven.version>1.21.0</gitflow-maven.version>
 
