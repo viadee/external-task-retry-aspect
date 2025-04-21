@@ -51,7 +51,7 @@
         <license-maven.version>4.6</license-maven.version>
         <maven-javadoc.version>3.11.2</maven-javadoc.version>
         <maven-gpg.version>3.2.7</maven-gpg.version>
-        <versions-maven.version>2.17.1</versions-maven.version>
+        <versions-maven.version>2.18.0</versions-maven.version>
         <gitflow-maven.version>1.21.0</gitflow-maven.version>
 
     </properties>
