@@ -49,7 +49,8 @@ simply replace the `camunda-external-task-client` dependency with the following,
 
 ```
 
-
+**Also, starting with release 1.12.0 this library supports usage with either Spring-Boot 3 or Spring-Boot 4. 
+To support this, the correct Aspect-Oriented Programming extension needs to be provided by the user at runtime. For mor info see the following `dependencies` section.**
 
 1. Besides the `camunda-external-task-client` dependency, the following maven-coordinate needs to be added to the `pom.xml`. As
 a `spring-boot-starter`, the aspect will be loaded automatically as soon as the handler-application starts:
@@ -69,7 +70,23 @@ a `spring-boot-starter`, the aspect will be loaded automatically as soon as the 
         <artifactId>camunda-bpm-spring-boot-starter-external-task-client</artifactId>
         <version>...</version>
     </dependency>
+    
+    <!-- The correct AspectJ Dependency at runtime for either Spring 3.x -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-aop</artifactId>
+        <version>...</version>
+        <scope>runtime</scope>
+    </dependency>
 
+    <!-- ...or for Spring 4.x -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-aspectj</artifactId>
+        <version>...</version>
+        <scope>runtime</scope>  
+    </dependency>
+    
     <!-- finally: the retry-aspect itself  -->
     <dependency>
         <groupId>de.viadee.bpm.camunda</groupId>
