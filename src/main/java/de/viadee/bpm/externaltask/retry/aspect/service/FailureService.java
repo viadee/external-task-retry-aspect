@@ -29,11 +29,11 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package de.viadee.bpm.camunda.externaltask.retry.aspect.service;
+package de.viadee.bpm.externaltask.retry.aspect.service;
 
 import de.viadee.bpm.camunda.externaltask.retry.aspect.error.InstantIncidentException;
-import org.camunda.bpm.client.task.ExternalTask;
-import org.camunda.bpm.client.task.ExternalTaskService;
+import de.viadee.bpm.externaltask.retry.aspect.model.ExternalTaskAdapter;
+import de.viadee.bpm.externaltask.retry.aspect.model.ExternalTaskServiceAdapter;
 import org.slf4j.LoggerFactory;
 
 import java.io.PrintWriter;
@@ -54,8 +54,8 @@ public class FailureService {
 
 
     public void handleFailure(final Class<?> origin,
-                              final ExternalTask externalTask,
-                              final ExternalTaskService externalTaskService,
+                              final ExternalTaskAdapter externalTask,
+                              final ExternalTaskServiceAdapter externalTaskService,
                               final Exception exception) {
 
         this.handleFailure(origin, externalTask, externalTaskService, exception, false);
@@ -63,8 +63,8 @@ public class FailureService {
 
 
     public void handleFailure(final Class<?> origin,
-                              final ExternalTask externalTask,
-                              final ExternalTaskService externalTaskService,
+                              final ExternalTaskAdapter externalTask,
+                              final ExternalTaskServiceAdapter externalTaskService,
                               final Exception exception,
                               final boolean directIncident) {
 

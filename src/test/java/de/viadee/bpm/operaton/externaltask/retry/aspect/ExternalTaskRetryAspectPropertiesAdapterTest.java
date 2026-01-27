@@ -29,21 +29,38 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package de.viadee.bpm.camunda.externaltask.retry.aspect.behaviour;
+package de.viadee.bpm.operaton.externaltask.retry.aspect;
 
-import de.viadee.bpm.camunda.externaltask.retry.aspect.CamundaBaseTest;
+import de.viadee.bpm.camunda.externaltask.retry.aspect.config.CamundaExternalTaskRetryAspectProperties;
+import de.viadee.bpm.externaltask.retry.aspect.config.RetryAspectConfigurationAdapter;
+import de.viadee.bpm.operaton.externaltask.retry.aspect.config.config.OperatonExternalTaskRetryAspectProperties;
 import org.junit.jupiter.api.Test;
-import org.springframework.test.context.TestPropertySource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-@TestPropertySource(properties = "de.viadee.bpm.camunda.external-task.retry-config.identifier=CUSTOM_SOMETHING")
-public class CustomRetryTimeCycleIdentifierTest extends CamundaBaseTest {
+public class ExternalTaskRetryAspectPropertiesAdapterTest {
 
     @Test
-    public void customRetryTimeCycleIdentifier() {
-        assertEquals("CUSTOM_SOMETHING", this.properties.getIdentifier());
+    public void propertiesShouldNotBeNullTest() {
+        OperatonExternalTaskRetryAspectProperties properties = new OperatonExternalTaskRetryAspectProperties();
+        properties.setIdentifier(null);
+        properties.setDefaultBehavior(null);
+        RetryAspectConfigurationAdapter adapter = new RetryAspectConfigurationAdapter(null, properties);
+
+        assertEquals("R3/PT5M", adapter.getDefaultBehavior());
+        assertEquals("RETRY_CONFIG", adapter.getIdentifier());
     }
 
+
+    @Test
+    public void propertiesShouldNotBeEmptyTest() {
+        OperatonExternalTaskRetryAspectProperties properties = new OperatonExternalTaskRetryAspectProperties();
+        properties.setIdentifier("  ");
+        properties.setDefaultBehavior("  ");
+        RetryAspectConfigurationAdapter adapter = new RetryAspectConfigurationAdapter( null, properties);
+
+        assertEquals("R3/PT5M", adapter.getDefaultBehavior());
+        assertEquals("RETRY_CONFIG", adapter.getIdentifier());
+    }
 }

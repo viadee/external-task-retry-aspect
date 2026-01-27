@@ -31,7 +31,7 @@
  */
 package de.viadee.bpm.camunda.externaltask.retry.aspect.behaviour;
 
-import de.viadee.bpm.camunda.externaltask.retry.aspect.BaseTest;
+import de.viadee.bpm.camunda.externaltask.retry.aspect.CamundaBaseTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.TestPropertySource;
 
@@ -39,7 +39,7 @@ import static org.mockito.Mockito.when;
 
 
 @TestPropertySource(properties = "de.viadee.bpm.camunda.external-task.retry-config.default-behavior=R3/PT37M")
-public class InvalidRetryTimeCycleValuesTest extends BaseTest {
+public class InvalidRetryTimeCycleValuesTest extends CamundaBaseTest {
 
 
     @Test
@@ -62,7 +62,7 @@ public class InvalidRetryTimeCycleValuesTest extends BaseTest {
         when(this.externalTask.getExtensionProperty(this.properties.getIdentifier())).thenReturn(retryTimeCycle);
 
         // test
-        this.externalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException(), this.externalTask, this.externalTaskService);
+        this.camundaExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException(), this.externalTask, this.externalTaskService);
 
         // verify
         this.verifyNoBpmnErrorAtAll();

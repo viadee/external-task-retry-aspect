@@ -29,38 +29,48 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package de.viadee.bpm.camunda.externaltask.retry.aspect.config;
+package de.viadee.bpm.operaton.externaltask.retry.aspect.behaviour;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import de.viadee.bpm.operaton.externaltask.retry.aspect.OperatonBaseTest;
+import org.junit.jupiter.api.Test;
+import org.springframework.test.context.TestPropertySource;
 
-import java.util.Objects;
-
-
-@ConfigurationProperties(prefix = "de.viadee.bpm.camunda.external-task.retry-config")
-public class ExternalTaskRetryAspectProperties {
-
-    //@formatter:off
-    private String defaultBehavior    = "R3/PT5M";
-    private String identifier         = "RETRY_CONFIG";
-    //@formatter:on
+import static org.mockito.Mockito.when;
 
 
-    public String getDefaultBehavior() {
-        return this.defaultBehavior;
+@TestPropertySource(properties = "de.viadee.bpm.operaton.external-task.retry-config.default-behavior=R3/PT37M")
+public class InvalidRetryTimeCycleValuesTest extends OperatonBaseTest {
+
+
+    @Test
+    public void invalidRetryTimeCycle() {
+        // PT3D not valid -> 'default-retry-time-cycle' should be used
+        this.invalidTimeCycleDetectedByRegularExpression("R3/PT3D");
     }
 
-    public void setDefaultBehavior(final String defaultBehavior) {
-        if (Objects.isNull(defaultBehavior) || defaultBehavior.trim().isEmpty()) return;
-        this.defaultBehavior = defaultBehavior.replace(" ", "").toUpperCase();
+
+    @Test
+    public void invalidRetryTimeCycleList() {
+        // PT3D not valid -> 'default-retry-time-cycle' should be used
+        this.invalidTimeCycleDetectedByRegularExpression("PT10M,PT3D,PT10M");
     }
 
-    public String getIdentifier() {
-        return this.identifier;
-    }
 
-    public void setIdentifier(final String identifier) {
-        if (Objects.isNull(identifier) || identifier.trim().isEmpty()) return;
-        this.identifier = identifier;
+    public void invalidTimeCycleDetectedByRegularExpression(final String retryTimeCycle) {
+        // prepare
+        when(this.externalTask.getRetries()).thenReturn(3);
+        when(this.externalTask.getExtensionProperty(this.properties.getIdentifier())).thenReturn(retryTimeCycle);
+
+        // test
+        this.operatonExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException(), this.externalTask, this.externalTaskService);
+
+        // verify
+        this.verifyNoBpmnErrorAtAll();
+        this.verifyHandleFailure();
+
+        // assert
+        this.assertRemainingRetries(2);
+        this.assertNextRetryInterval(37 * MINUTES_TO_MILLIS);
     }
 
 }

@@ -22,7 +22,7 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
       - name: Publish package
-        run: mvn clean deploy --batch-mode
+        run: mvn clean deploy --batch-mode -P spring-3
         env:
           MAVEN_USERNAME: ${{ vars.MAVEN_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_USERNAME_SECRET }}

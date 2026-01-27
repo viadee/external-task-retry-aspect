@@ -29,18 +29,79 @@
         </developer>
     </developers>
 
+    <profiles>
+        <profile>
+            <id>spring-3</id>
+            <properties>
+                <java.version>21</java.version>
+                <spring-boot.version>3.5.9</spring-boot.version>
+                <camunda-external-task-client.version>7.24.0</camunda-external-task-client.version>
+                <operaton-external-task-client.version>1.0.3</operaton-external-task-client.version>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-aop</artifactId>
+                    <version>${spring-boot.version}</version>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>spring-4</id>
+            <properties>
+                <java.version>21</java.version>
+                <spring-boot.version>4.0.2</spring-boot.version>
+                <camunda-external-task-client.version>7.24.0</camunda-external-task-client.version>
+                <operaton-external-task-client.version>1.0.3</operaton-external-task-client.version>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-aspectj</artifactId>
+                    <version>${spring-boot.version}</version>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>${maven-gpg.version}</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <gpgArguments>
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                            </gpgArguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 
     <properties>
         <!-- settings -->
-        <java.version>21</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <!-- versions -->
-        <spring-boot.version>3.5.9</spring-boot.version>
-        <external-task-client.version>7.24.0</external-task-client.version>
         <commons-lang3.version>3.15.0</commons-lang3.version>
-        <junit-jupiter.version>5.11.2</junit-jupiter.version>
+        <junit-jupiter.version>6.0.2</junit-jupiter.version>
         <mockito.version>5.20.0</mockito.version>
 
         <!-- plugins -->
@@ -61,7 +122,14 @@
         <dependency>
             <groupId>org.camunda.bpm</groupId>
             <artifactId>camunda-external-task-client</artifactId>
-            <version>${external-task-client.version}</version>
+            <version>${camunda-external-task-client.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.operaton.bpm</groupId>
+            <artifactId>operaton-external-task-client</artifactId>
+            <version>${operaton-external-task-client.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -69,12 +137,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
             <version>${spring-boot.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-            <version>${spring-boot.version}</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -82,6 +151,7 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <version>${spring-boot.version}</version>
             <optional>true</optional>
+            <scope>provided</scope>
         </dependency>
 
 
@@ -108,44 +178,6 @@
         </dependency>
 
     </dependencies>
-
-
-    <profiles>
-        <profile>
-            <id>release-sign-artifacts</id>
-            <activation>
-                <property>
-                    <name>performRelease</name>
-                    <value>true</value>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>${maven-gpg.version}</version>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <gpgArguments>
-                                <arg>--pinentry-mode</arg>
-                                <arg>loopback</arg>
-                            </gpgArguments>
-                       </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
 
     <build>
         <resources>

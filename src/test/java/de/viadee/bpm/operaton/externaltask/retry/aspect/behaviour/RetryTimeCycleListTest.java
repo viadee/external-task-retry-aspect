@@ -29,9 +29,9 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package de.viadee.bpm.camunda.externaltask.retry.aspect.behaviour;
+package de.viadee.bpm.operaton.externaltask.retry.aspect.behaviour;
 
-import de.viadee.bpm.camunda.externaltask.retry.aspect.CamundaBaseTest;
+import de.viadee.bpm.operaton.externaltask.retry.aspect.OperatonBaseTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.Objects;
@@ -39,7 +39,7 @@ import java.util.Objects;
 import static org.mockito.Mockito.when;
 
 
-public class RetryTimeCycleListTest extends CamundaBaseTest {
+public class RetryTimeCycleListTest extends OperatonBaseTest {
 
     //                                              10.   9.   8.      7.   6.        5.  4.      3.      2.      1.
     private static final String RETRY_CYCLE_LIST = "PT10S,PT2M,PT3M45S,PT4H,PT5H42M2S,P4D,P5DT11H,P5DT11M,P5DT33S,P11DT11H11M11S";
@@ -123,7 +123,7 @@ public class RetryTimeCycleListTest extends CamundaBaseTest {
         when(this.externalTask.getExtensionProperty(this.properties.getIdentifier())).thenReturn(RETRY_CYCLE_LIST);
 
         // test
-        this.camundaExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException(), this.externalTask, this.externalTaskService);
+        this.operatonExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException(), this.externalTask, this.externalTaskService);
 
         // verify
         this.verifyNoBpmnErrorAtAll();

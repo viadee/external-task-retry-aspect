@@ -29,41 +29,15 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package de.viadee.bpm.camunda.externaltask.retry.aspect.service;
+package de.viadee.bpm.operaton.externaltask.retry.aspect.config.config;
 
-import de.viadee.bpm.camunda.externaltask.retry.aspect.config.ExternalTaskRetryAspectProperties;
-import de.viadee.bpm.camunda.externaltask.retry.aspect.model.RetryBehaviour;
-import de.viadee.bpm.camunda.externaltask.retry.aspect.model.RetryConfigValues;
-import org.camunda.bpm.client.task.ExternalTask;
-
-
-public final class PropertyService {
-
-    private final RetryConfigValues valueVault;
-
-    public PropertyService(final ExternalTaskRetryAspectProperties properties) {
-        this.valueVault = new RetryConfigValues(properties);
-    }
+import de.viadee.bpm.externaltask.retry.aspect.config.RetryAspectConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 
-    public int remainingRetries(final ExternalTask externalTask) {
-        RetryBehaviour retryBehaviour = new RetryBehaviour(externalTask, this.valueVault);
-        return this.remainingRetries(retryBehaviour);
-    }
-
-
-    public int remainingRetries(final RetryBehaviour retryBehaviour) {
-        if (retryBehaviour.hasRetries()) {
-            return retryBehaviour.nextRetries();
-        } else {
-            return retryBehaviour.determineRetriesFromConfig();
-        }
-    }
-
-    public long nextRetryInterval(final ExternalTask externalTask) {
-        RetryBehaviour retryBehaviour = new RetryBehaviour(externalTask, this.valueVault);
-        final int remainingRetries = this.remainingRetries(retryBehaviour);
-        return retryBehaviour.nextRetryInterval(remainingRetries);
-    }
+@ConfigurationProperties(prefix = "de.viadee.bpm.operaton.external-task.retry-config")
+@ConditionalOnProperty("de.viadee.bpm.operaton.external-task.retry-config.default-behavior")
+public class OperatonExternalTaskRetryAspectProperties extends RetryAspectConfiguration {
 
 }
