@@ -29,36 +29,40 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package de.viadee.bpm.camunda.externaltask.retry.aspect.config;
+package de.viadee.bpm.externaltask.retry.aspect.config;
 
-import de.viadee.bpm.camunda.externaltask.retry.aspect.CamundaExternalTaskRetryAspect;
+
+import de.viadee.bpm.camunda.externaltask.retry.aspect.config.CamundaExternalTaskRetryAspectProperties;
 import de.viadee.bpm.externaltask.retry.aspect.service.BusinessErrorService;
 import de.viadee.bpm.externaltask.retry.aspect.service.FailureService;
 import de.viadee.bpm.externaltask.retry.aspect.service.PropertyService;
-import de.viadee.bpm.externaltask.retry.aspect.config.ExternalTaskRetryAspectConfiguration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import de.viadee.bpm.operaton.externaltask.retry.aspect.config.config.OperatonExternalTaskRetryAspectProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
-
 @Configuration
-@ConditionalOnMissingBean(ExternalTaskRetryAspectConfiguration.class)
+@EnableConfigurationProperties({CamundaExternalTaskRetryAspectProperties.class, OperatonExternalTaskRetryAspectProperties.class})
 @EnableAspectJAutoProxy(proxyTargetClass = true)
-@EnableConfigurationProperties(CamundaExternalTaskRetryAspectProperties.class)
-@Deprecated
-public class ExternalTaskRetryAspectAutoConfiguration {
+public class ExternalTaskRetryAspectConfiguration {
 
-    private final Logger LOG = LoggerFactory.getLogger(this.getClass());
+    private final OperatonExternalTaskRetryAspectProperties operatonExternalTaskRetryAspectProperties;
     private final CamundaExternalTaskRetryAspectProperties camundaExternalTaskRetryAspectProperties;
 
-    public ExternalTaskRetryAspectAutoConfiguration(final CamundaExternalTaskRetryAspectProperties camundaExternalTaskRetryAspectProperties) {
-        LOG.warn("Your ScanPath is configured to only include a deprecated Version of the Retry-Aspect Configuration (without Operaton support).\n" +
-                "Please adapt it to load de.viadee.bpm.externaltask.retry.aspect.configExternalTaskRetryAspectConfiguration");
+
+    public ExternalTaskRetryAspectConfiguration(@Autowired(required = false) OperatonExternalTaskRetryAspectProperties operatonExternalTaskRetryAspectProperties,
+                                                @Autowired(required = false) CamundaExternalTaskRetryAspectProperties camundaExternalTaskRetryAspectProperties) {
+        this.operatonExternalTaskRetryAspectProperties = operatonExternalTaskRetryAspectProperties;
         this.camundaExternalTaskRetryAspectProperties = camundaExternalTaskRetryAspectProperties;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public PropertyService propertyService() {
+        return new PropertyService(new RetryAspectConfigurationAdapter(camundaExternalTaskRetryAspectProperties, operatonExternalTaskRetryAspectProperties));
     }
 
     @Bean
@@ -69,23 +73,8 @@ public class ExternalTaskRetryAspectAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public FailureService failureHandlingService() {
-        return new FailureService(this.propertyService());
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public CamundaExternalTaskRetryAspect externalTaskRetryAspect() {
-        return new CamundaExternalTaskRetryAspect(
-                this.businessErrorService(),
-                this.failureHandlingService()
-        );
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public PropertyService propertyService() {
-        return new PropertyService(this.camundaExternalTaskRetryAspectProperties);
+    public FailureService failureHandlingService(@Autowired final PropertyService propertyService) {
+        return new FailureService(propertyService);
     }
 
 }

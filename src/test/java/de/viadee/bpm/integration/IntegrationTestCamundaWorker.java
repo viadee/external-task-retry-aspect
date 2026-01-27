@@ -29,21 +29,28 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package de.viadee.bpm.camunda.externaltask.retry.aspect.behaviour;
+package de.viadee.bpm.integration;
 
-import de.viadee.bpm.camunda.externaltask.retry.aspect.CamundaBaseTest;
-import org.junit.jupiter.api.Test;
-import org.springframework.test.context.TestPropertySource;
+import org.camunda.bpm.client.task.ExternalTask;
+import org.camunda.bpm.client.task.ExternalTaskHandler;
+import org.camunda.bpm.client.task.ExternalTaskService;
+import org.springframework.stereotype.Component;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+@Component
+public class IntegrationTestCamundaWorker implements ExternalTaskHandler {
+
+    private int executionCount = 0;
 
 
-@TestPropertySource(properties = "de.viadee.bpm.camunda.external-task.retry-config.identifier=CUSTOM_SOMETHING")
-public class CustomRetryTimeCycleIdentifierTest extends CamundaBaseTest {
+    @Override
+    public void execute(ExternalTask externalTask, ExternalTaskService externalTaskService) {
 
-    @Test
-    public void customRetryTimeCycleIdentifier() {
-        assertEquals("CUSTOM_SOMETHING", this.properties.getIdentifier());
+        if (executionCount++ == 0) {
+            throw new RuntimeException("Please execute retry");
+        }
     }
 
+    public int getExecutionCount() {
+        return executionCount;
+    }
 }

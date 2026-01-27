@@ -29,17 +29,17 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package de.viadee.bpm.camunda.externaltask.retry.aspect.behaviour;
+package de.viadee.bpm.operaton.externaltask.retry.aspect.behaviour;
 
-import de.viadee.bpm.camunda.externaltask.retry.aspect.CamundaBaseTest;
+import de.viadee.bpm.operaton.externaltask.retry.aspect.OperatonBaseTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.TestPropertySource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-@TestPropertySource(properties = "de.viadee.bpm.camunda.external-task.retry-config.identifier=CUSTOM_SOMETHING")
-public class CustomRetryTimeCycleIdentifierTest extends CamundaBaseTest {
+@TestPropertySource(properties = "de.viadee.bpm.operaton.external-task.retry-config.identifier=CUSTOM_SOMETHING")
+public class CustomRetryTimeCycleIdentifierTest extends OperatonBaseTest {
 
     @Test
     public void customRetryTimeCycleIdentifier() {

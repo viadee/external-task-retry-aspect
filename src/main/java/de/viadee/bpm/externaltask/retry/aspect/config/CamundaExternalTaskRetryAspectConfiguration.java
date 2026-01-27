@@ -29,32 +29,30 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package de.viadee.bpm.camunda.externaltask.retry.aspect;
+package de.viadee.bpm.externaltask.retry.aspect.config;
 
-import de.viadee.bpm.camunda.externaltask.retry.aspect.config.ExternalTaskRetryAspectProperties;
-import org.junit.jupiter.api.Test;
+import de.viadee.bpm.camunda.externaltask.retry.aspect.CamundaExternalTaskRetryAspect;
+import de.viadee.bpm.camunda.externaltask.retry.aspect.config.CamundaExternalTaskRetryAspectProperties;
+import de.viadee.bpm.externaltask.retry.aspect.service.BusinessErrorService;
+import de.viadee.bpm.externaltask.retry.aspect.service.FailureService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+@Configuration
+@ConditionalOnClass(org.camunda.bpm.client.ExternalTaskClient.class)
+public class CamundaExternalTaskRetryAspectConfiguration {
 
-
-public class ExternalTaskRetryAspectPropertiesTest {
-
-    @Test
-    public void propertiesShouldNotBeNullTest() {
-        ExternalTaskRetryAspectProperties properties = new ExternalTaskRetryAspectProperties();
-        properties.setIdentifier(null);
-        properties.setDefaultBehavior(null);
-        assertEquals("R3/PT5M", properties.getDefaultBehavior());
-        assertEquals("RETRY_CONFIG", properties.getIdentifier());
+    @Bean
+    @ConditionalOnMissingBean
+    public CamundaExternalTaskRetryAspect camundaExternalTaskRetryAspect(@Autowired final FailureService failureService, @Autowired BusinessErrorService businessErrorService) {
+        return new CamundaExternalTaskRetryAspect(
+                businessErrorService,
+                failureService
+        );
     }
 
-
-    @Test
-    public void propertiesShouldNotBeEmptyTest() {
-        ExternalTaskRetryAspectProperties properties = new ExternalTaskRetryAspectProperties();
-        properties.setIdentifier("  ");
-        properties.setDefaultBehavior("  ");
-        assertEquals("R3/PT5M", properties.getDefaultBehavior());
-        assertEquals("RETRY_CONFIG", properties.getIdentifier());
-    }
 }

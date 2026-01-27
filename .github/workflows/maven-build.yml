@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-spring-3:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -20,4 +20,16 @@ jobs:
           java-version: '21'
           cache: 'maven'
       - name: Build with Maven
-        run: mvn -B verify --file pom.xml
+        run: mvn -B -P spring-3 verify --file pom.xml
+  build-spring-4:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'maven'
+      - name: Build with Maven
+        run: mvn -B verify -P spring-4 --file pom.xml

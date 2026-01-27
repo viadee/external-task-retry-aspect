@@ -1,7 +1,8 @@
 # external-task-retry-aspect
 [![](https://img.shields.io/maven-central/v/de.viadee.bpm.camunda/external-task-retry-aspect-spring-boot-starter)](https://search.maven.org/artifact/de.viadee.bpm.camunda/external-task-retry-aspect-spring-boot-starter)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/viadee/external-task-retry-aspect)
-[![](https://img.shields.io/badge/External%20Task%20Handler-7.24.0-orange.svg)](https://docs.camunda.org/manual/7.24/user-guide/ext-client/spring-boot-starter)
+[![](https://img.shields.io/badge/Camunda%20External%20Task%20Handler-7.24.0-orange.svg)](https://docs.camunda.org/manual/7.24/user-guide/ext-client/spring-boot-starter)
+[![](https://img.shields.io/badge/Operaton%20External%20Task%20Handler-1.0.3-white.svg)](https://docs.operaton.org/docs/documentation/user-guide/process-engine/external-tasks/)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/viadee/external-task-retry-aspect/maven-build.yml)
 [![](https://img.shields.io/github/issues/viadee/external-task-retry-aspect)](https://github.com/viadee/external-task-retry-aspect/issues)
 [![](https://img.shields.io/github/stars/viadee/external-task-retry-aspect)](https://github.com/viadee/external-task-retry-aspect/stargazers)
@@ -10,6 +11,12 @@
 This tool helps to control the retry-behaviour in external-task-handlers based on the
 official [java-client](https://docs.camunda.org/manual/latest/user-guide/ext-client/) provided
 by [Camunda BPM](https://docs.camunda.org/manual/latest/user-guide/ext-client/).
+
+## ⚠️ Important notice
+With the latest release support for the Camunda 7 Fork [Operaton](https://operaton.org) is added. 
+In this release we try to keep the compatibility to the previous releases as high as possible. 
+Therefor the artifact is still located under `de.viadee.bpm.camunda`, we take the liberty to change this in upcoming releases.
+We also consider splitting this library into two releases one for each engine or dropping support for Camunda 7 in upcoming releases.
 
 ## ⭐ Features
 * Retry-behaviour for external-tasks can be configured in process-models as known from `JavaDelegates`
@@ -20,6 +27,30 @@ by [Camunda BPM](https://docs.camunda.org/manual/latest/user-guide/ext-client/).
 * Configurable default retry-behaviour
 
 ## 🚀 How to use
+
+### 🆕 New Feature
+Starting with Release `1.12.0` to use this library with [Operaton](https://operaton.org), 
+simply replace the `camunda-external-task-client` dependency with the following, the retry-aspect automatically detects which library to bind to:
+
+```xml
+ <!-- works either with the original external-task-client... -->    
+<dependency>
+    <groupId>org.operaton.bpm</groupId>
+    <artifactId>operaton-external-task-client</artifactId>
+    <version>...</version>
+</dependency>
+        
+<!-- ...or with new spring-boot-starter-external-task-client -->
+<dependency>
+    <groupId>org.operaton.bpm.springboot</groupId>
+    <artifactId>operaton-bpm-spring-boot-starter-external-task-client</artifactId>
+    <version>...</version>
+</dependency>
+
+```
+
+
+
 1. Besides the `camunda-external-task-client` dependency, the following maven-coordinate needs to be added to the `pom.xml`. As
 a `spring-boot-starter`, the aspect will be loaded automatically as soon as the handler-application starts:
 ```xml
@@ -93,6 +124,17 @@ de.viadee.bpm.camunda.external-task.retry-config.default-behavior=R3/PT5M
 de.viadee.bpm.camunda.external-task.retry-config.identifier=RETRY_CONFIG
 ```
 
+#### 🆕 New Feature
+Starting with Version `1.12.0` for Operaton based engines, the configuration properties can also be the following, support for the camunda based properties is still available:
+```properties
+# Default retry-behaviour, if no retry is configured. 
+# Whenever this property is configured incorrectly, 'R3/PT5M' is also used as fallback
+de.viadee.bpm.operaton.external-task.retry-config.default-behavior=R3/PT5M
+
+# Identifier used in bpmn-extension-properties, default=RETRY_CONFIG
+de.viadee.bpm.operaton.external-task.retry-config.identifier=RETRY_CONFIG
+```
+
 ## 🧙 How this might help?
 A comparison of some `ConventionalHandler` with an `AspectedHandler` explains how the error-handling 
 can be completely left out, because anything is done by the `retry-aspect`:
@@ -150,20 +192,21 @@ The following versions are used. Older versions are probably not maintained, but
 use a newer version of the Retry-Aspect in combination with an older version of the External-Task-Client. If you encounter
 any issue, please feel free to contact me.
 
-| Retry-Aspect | External-Task-Client | Spring Boot |  
-|-------------:|---------------------:|------------:|
-|        1.2.x |               7.15.0 |       2.5.x |
-|        1.3.x |               7.16.0 |       2.6.x |
-|        1.4.x |               7.17.0 |       2.6.x |
-|        1.4.2 |               7.17.0 |       2.7.x |
-|        1.5.x |               7.18.0 |       2.7.x |
-|        1.6.x |               7.19.0 |       2.7.x |
-|        1.7.x |               7.19.0 |       2.7.x |
-|        1.8.x |               7.20.0 |       3.1.x |
-|        1.9.0 |               7.21.0 |       3.3.x |
-|       1.9.1+ |               7.22.0 |       3.3.x |
-|       1.10.0 |               7.23.0 |       3.4.x |
-|       1.11.0 |               7.24.0 |       3.5.x |
+| Retry-Aspect | Camunda External-Task-Client | Operaton External-Task-Client |                     Spring Boot |  
+|-------------:|-----------------------------:|------------------------------:|--------------------------------:|
+|        1.2.x |                       7.15.0 |                   Unsupported |                           2.5.x |
+|        1.3.x |                       7.16.0 |                   Unsupported |                           2.6.x |
+|        1.4.x |                       7.17.0 |                   Unsupported |                           2.6.x |
+|        1.4.2 |                       7.17.0 |                   Unsupported |                           2.7.x |
+|        1.5.x |                       7.18.0 |                   Unsupported |                           2.7.x |
+|        1.6.x |                       7.19.0 |                   Unsupported |                           2.7.x |
+|        1.7.x |                       7.19.0 |                   Unsupported |                           2.7.x |
+|        1.8.x |                       7.20.0 |                   Unsupported |                           3.1.x |
+|        1.9.0 |                       7.21.0 |                   Unsupported |                           3.3.x |
+|       1.9.1+ |                       7.22.0 |                   Unsupported |                           3.3.x |
+|       1.10.0 |                       7.23.0 |                   Unsupported |                           3.4.x |
+|      1.11.0+ |                       7.24.0 |                   Unsupported |                           3.5.x |
+|      1.12.0+ |                       7.24.0 |                         1.0.3 |                           3.5.x |
 
 
 ## 🤹 Collaboration
@@ -174,6 +217,7 @@ If you have any feedback, ideas or extensions feel free to contact or create a G
 ## 🏆 Thanks
 
 * Many thanks to [@ChrisSchoe][u_chrisschoe] for making the external-task-retry-aspect spring-boot-3-ready ([#107][i107])
+* Many thanks to [@jschneider97][jschneider97] for making the external-task-retry-aspect ready for Operaton and Springboot 4 ([#147](https://github.com/viadee/external-task-retry-aspect/issues/147))
 
 ## 🔑 License
 

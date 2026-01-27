@@ -29,21 +29,30 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package de.viadee.bpm.camunda.externaltask.retry.aspect.behaviour;
+package de.viadee.bpm.externaltask.retry.aspect.config;
 
-import de.viadee.bpm.camunda.externaltask.retry.aspect.CamundaBaseTest;
-import org.junit.jupiter.api.Test;
-import org.springframework.test.context.TestPropertySource;
+import de.viadee.bpm.externaltask.retry.aspect.service.BusinessErrorService;
+import de.viadee.bpm.externaltask.retry.aspect.service.FailureService;
+import de.viadee.bpm.operaton.externaltask.retry.aspect.config.OperatonExternalTaskRetryAspect;
+import de.viadee.bpm.operaton.externaltask.retry.aspect.config.config.OperatonExternalTaskRetryAspectProperties;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+@Configuration
+@ConditionalOnClass(org.operaton.bpm.client.ExternalTaskClient.class)
+public class OperatonExternalTaskRetryAspectConfiguration {
 
-
-@TestPropertySource(properties = "de.viadee.bpm.camunda.external-task.retry-config.identifier=CUSTOM_SOMETHING")
-public class CustomRetryTimeCycleIdentifierTest extends CamundaBaseTest {
-
-    @Test
-    public void customRetryTimeCycleIdentifier() {
-        assertEquals("CUSTOM_SOMETHING", this.properties.getIdentifier());
+    @Bean
+    @ConditionalOnMissingBean
+    public OperatonExternalTaskRetryAspect operatonExternalTaskRetryAspect(@Autowired final FailureService failureService, @Autowired BusinessErrorService businessErrorService) {
+        return new OperatonExternalTaskRetryAspect(
+                businessErrorService,
+                failureService
+        );
     }
 
 }

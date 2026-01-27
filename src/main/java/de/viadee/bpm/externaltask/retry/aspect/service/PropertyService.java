@@ -29,21 +29,41 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package de.viadee.bpm.camunda.externaltask.retry.aspect.behaviour;
+package de.viadee.bpm.externaltask.retry.aspect.service;
 
-import de.viadee.bpm.camunda.externaltask.retry.aspect.CamundaBaseTest;
-import org.junit.jupiter.api.Test;
-import org.springframework.test.context.TestPropertySource;
+import de.viadee.bpm.camunda.externaltask.retry.aspect.model.RetryBehaviour;
+import de.viadee.bpm.camunda.externaltask.retry.aspect.model.RetryConfigValues;
+import de.viadee.bpm.externaltask.retry.aspect.config.RetryAspectConfiguration;
+import de.viadee.bpm.externaltask.retry.aspect.model.ExternalTaskAdapter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public final class PropertyService {
+
+    private final RetryConfigValues valueVault;
+
+    public PropertyService(final RetryAspectConfiguration properties) {
+        this.valueVault = new RetryConfigValues(properties);
+    }
 
 
-@TestPropertySource(properties = "de.viadee.bpm.camunda.external-task.retry-config.identifier=CUSTOM_SOMETHING")
-public class CustomRetryTimeCycleIdentifierTest extends CamundaBaseTest {
+    public int remainingRetries(final ExternalTaskAdapter externalTask) {
+        RetryBehaviour retryBehaviour = new RetryBehaviour(externalTask, this.valueVault);
+        return this.remainingRetries(retryBehaviour);
+    }
 
-    @Test
-    public void customRetryTimeCycleIdentifier() {
-        assertEquals("CUSTOM_SOMETHING", this.properties.getIdentifier());
+
+    public int remainingRetries(final RetryBehaviour retryBehaviour) {
+        if (retryBehaviour.hasRetries()) {
+            return retryBehaviour.nextRetries();
+        } else {
+            return retryBehaviour.determineRetriesFromConfig();
+        }
+    }
+
+    public long nextRetryInterval(final ExternalTaskAdapter externalTask) {
+        RetryBehaviour retryBehaviour = new RetryBehaviour(externalTask, this.valueVault);
+        final int remainingRetries = this.remainingRetries(retryBehaviour);
+        return retryBehaviour.nextRetryInterval(remainingRetries);
     }
 
 }

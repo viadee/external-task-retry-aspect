@@ -29,26 +29,55 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package de.viadee.bpm.camunda.externaltask.retry.aspect.behaviour;
+package de.viadee.bpm.operaton.externaltask.retry.aspect.behaviour;
 
-import de.viadee.bpm.camunda.externaltask.retry.aspect.CamundaBaseTest;
+import de.viadee.bpm.operaton.externaltask.retry.aspect.OperatonBaseTest;
 import org.junit.jupiter.api.Test;
-import org.springframework.test.context.TestPropertySource;
 
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.when;
 
-@TestPropertySource(properties = "de.viadee.bpm.camunda.external-task.retry-config.default-behavior=R3/PT1D")
-public class InvalidDefaultBehaviourTest extends CamundaBaseTest {
+
+public class EdgeCaseTest extends OperatonBaseTest {
+
+    @Test
+    public void testMethod() {
+        try {
+            this.operatonExternalTaskRetryAspect.externalTaskHandlerExecute(null, null);
+
+        } catch (Exception exception) {
+            fail("should not fail");
+        }
+    }
+
+
+    @Test
+    public void negativeRetriesTest() {
+        // prepare
+        when(this.externalTask.getRetries()).thenReturn(-1); // however
+
+        // test
+        this.operatonExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException(), this.externalTask, this.externalTaskService);
+
+        // verify
+        this.verifyNoBpmnErrorAtAll();
+        this.verifyHandleFailure();
+
+        // assert
+        this.assertRemainingRetries(0);
+    }
 
 
     @Test
     public void runtimeException() {
         // prepare
         when(this.externalTask.getRetries()).thenReturn(null);
-        when(this.externalTask.getExtensionProperty(this.properties.getIdentifier())).thenReturn("invld!");
+        when(this.externalTask
+                .getExtensionProperty(this.properties.getIdentifier()))
+                    .thenReturn("P,P,P"); // sadly, 'P' is matched by the used regex currently -> use hard-wired Fallback 'PT10M' then
 
         // test
-        this.camundaExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException(), this.externalTask, this.externalTaskService);
+        this.operatonExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException(), this.externalTask, this.externalTaskService);
 
         // verify
         this.verifyNoBpmnErrorAtAll();
@@ -59,5 +88,25 @@ public class InvalidDefaultBehaviourTest extends CamundaBaseTest {
         this.assertNextRetryInterval(5 * MINUTES_TO_MILLIS);
     }
 
+
+    @Test
+    public void noRetryBehaviour() {
+        // prepare
+        when(this.externalTask.getRetries()).thenReturn(null);
+        when(this.externalTask
+                .getExtensionProperty(this.properties.getIdentifier()))
+                    .thenReturn("R0/PT2M");
+
+        // test
+        this.operatonExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException("test"), this.externalTask, this.externalTaskService);
+
+        // verify
+        this.verifyNoBpmnErrorAtAll();
+        this.verifyHandleFailure();
+
+        // assert
+        this.assertRemainingRetries(0);
+        this.assertNextRetryInterval(0);
+    }
 
 }

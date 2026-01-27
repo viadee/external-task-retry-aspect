@@ -31,19 +31,19 @@
  */
 package de.viadee.bpm.camunda.externaltask.retry.aspect.behaviour;
 
-import de.viadee.bpm.camunda.externaltask.retry.aspect.BaseTest;
+import de.viadee.bpm.camunda.externaltask.retry.aspect.CamundaBaseTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.when;
 
 
-public class EdgeCaseTest extends BaseTest {
+public class EdgeCaseTest extends CamundaBaseTest {
 
     @Test
     public void testMethod() {
         try {
-            this.externalTaskRetryAspect.externalTaskHandlerExecute(null, null);
+            this.camundaExternalTaskRetryAspect.externalTaskHandlerExecute(null, null);
 
         } catch (Exception exception) {
             fail("should not fail");
@@ -57,7 +57,7 @@ public class EdgeCaseTest extends BaseTest {
         when(this.externalTask.getRetries()).thenReturn(-1); // however
 
         // test
-        this.externalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException(), this.externalTask, this.externalTaskService);
+        this.camundaExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException(), this.externalTask, this.externalTaskService);
 
         // verify
         this.verifyNoBpmnErrorAtAll();
@@ -77,7 +77,7 @@ public class EdgeCaseTest extends BaseTest {
                     .thenReturn("P,P,P"); // sadly, 'P' is matched by the used regex currently -> use hard-wired Fallback 'PT10M' then
 
         // test
-        this.externalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException(), this.externalTask, this.externalTaskService);
+        this.camundaExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException(), this.externalTask, this.externalTaskService);
 
         // verify
         this.verifyNoBpmnErrorAtAll();
@@ -98,7 +98,7 @@ public class EdgeCaseTest extends BaseTest {
                     .thenReturn("R0/PT2M");
 
         // test
-        this.externalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException("test"), this.externalTask, this.externalTaskService);
+        this.camundaExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException("test"), this.externalTask, this.externalTaskService);
 
         // verify
         this.verifyNoBpmnErrorAtAll();

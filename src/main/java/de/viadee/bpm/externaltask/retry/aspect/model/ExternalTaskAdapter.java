@@ -29,21 +29,40 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package de.viadee.bpm.camunda.externaltask.retry.aspect.behaviour;
-
-import de.viadee.bpm.camunda.externaltask.retry.aspect.CamundaBaseTest;
-import org.junit.jupiter.api.Test;
-import org.springframework.test.context.TestPropertySource;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+package de.viadee.bpm.externaltask.retry.aspect.model;
 
 
-@TestPropertySource(properties = "de.viadee.bpm.camunda.external-task.retry-config.identifier=CUSTOM_SOMETHING")
-public class CustomRetryTimeCycleIdentifierTest extends CamundaBaseTest {
+public class ExternalTaskAdapter {
 
-    @Test
-    public void customRetryTimeCycleIdentifier() {
-        assertEquals("CUSTOM_SOMETHING", this.properties.getIdentifier());
+    private final org.camunda.bpm.client.task.ExternalTask camundaExternalTask;
+    private final org.operaton.bpm.client.task.ExternalTask operatonExternalTask;
+
+
+    public ExternalTaskAdapter(org.camunda.bpm.client.task.ExternalTask camundaExternalTask) {
+        this.camundaExternalTask = camundaExternalTask;
+        this.operatonExternalTask = null;
+    }
+
+    public ExternalTaskAdapter(org.operaton.bpm.client.task.ExternalTask operatonExternalTask) {
+        this.camundaExternalTask = null;
+        this.operatonExternalTask = operatonExternalTask;
+    }
+
+    public Integer getRetries() {
+        return camundaExternalTask != null ? camundaExternalTask.getRetries() : operatonExternalTask.getRetries();
+    }
+
+    public String getExtensionProperty(final String name) {
+        return camundaExternalTask != null ? camundaExternalTask.getExtensionProperty(name) : operatonExternalTask.getExtensionProperty(name);
+    }
+
+    org.camunda.bpm.client.task.ExternalTask getCamundaExternalTask() {
+        return camundaExternalTask;
+    }
+
+
+    org.operaton.bpm.client.task.ExternalTask getOperatonExternalTask() {
+        return operatonExternalTask;
     }
 
 }
