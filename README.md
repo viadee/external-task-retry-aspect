@@ -49,7 +49,7 @@ simply replace the `camunda-external-task-client` dependency with the following,
 
 ```
 
-**Also, starting with release 1.12.0 this library supports usage with either Spring-Boot 3 or Spring-Boot 4. 
+⚠️ **Also, starting with release 1.12.0 this library supports usage with either Spring-Boot 3 or Spring-Boot 4. 
 To support this, the correct Aspect-Oriented Programming extension needs to be provided by the user at runtime. For mor info see the following `dependencies` section.**
 
 1. Besides the `camunda-external-task-client` dependency, the following maven-coordinate needs to be added to the `pom.xml`. As
