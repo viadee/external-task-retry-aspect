@@ -217,7 +217,7 @@ If you have any feedback, ideas or extensions feel free to contact or create a G
 ## 🏆 Thanks
 
 * Many thanks to [@ChrisSchoe][u_chrisschoe] for making the external-task-retry-aspect spring-boot-3-ready ([#107][i107])
-* Many thanks to [@jschneider97][jschneider97] for making the external-task-retry-aspect ready for Operaton and Springboot 4 (#147)
+* Many thanks to [@jschneider97][jschneider97] for making the external-task-retry-aspect ready for Operaton and Springboot 4 ([#147](https://github.com/viadee/external-task-retry-aspect/issues/147))
 
 ## 🔑 License
 
