@@ -27,6 +27,12 @@
             <organization>viadee Unternehmensberatung AG</organization>
             <organizationUrl>https://www.viadee.de</organizationUrl>
         </developer>
+        <developer>
+            <name>Justus Schneider</name>
+            <email>justus.schneider@viadee.de</email>
+            <organization>viadee Unternehmensberatung AG</organization>
+            <organizationUrl>https://www.viadee.de</organizationUrl>
+        </developer>
     </developers>
 
     <profiles>
