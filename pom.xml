@@ -116,7 +116,7 @@
         <maven-compiler.version>3.13.0</maven-compiler.version>
         <maven-surefire.version>3.5.4</maven-surefire.version>
         <license-maven.version>4.6</license-maven.version>
-        <maven-javadoc.version>3.11.2</maven-javadoc.version>
+        <maven-javadoc.version>3.12.0</maven-javadoc.version>
         <maven-gpg.version>3.2.7</maven-gpg.version>
         <versions-maven.version>2.19.1</versions-maven.version>
         <gitflow-maven.version>1.21.0</gitflow-maven.version>
