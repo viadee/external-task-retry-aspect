@@ -2,7 +2,8 @@
 [![](https://img.shields.io/maven-central/v/de.viadee.bpm.camunda/external-task-retry-aspect-spring-boot-starter)](https://search.maven.org/artifact/de.viadee.bpm.camunda/external-task-retry-aspect-spring-boot-starter)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/viadee/external-task-retry-aspect)
 [![](https://img.shields.io/badge/Camunda%20External%20Task%20Handler-7.24.0-orange.svg)](https://docs.camunda.org/manual/7.24/user-guide/ext-client/spring-boot-starter)
-[![](https://img.shields.io/badge/Operaton%20External%20Task%20Handler-1.0.3-white.svg)](https://docs.operaton.org/docs/documentation/user-guide/process-engine/external-tasks/)
+[![](https://img.shields.io/badge/Operaton%20External%20Task%20Handler-1.1.5-white.svg)](https://docs.operaton.org/docs/documentation/user-guide/process-engine/external-tasks/)
+[![](https://img.shields.io/badge/Operaton%20External%20Task%20Handler-2.1.5-white.svg)](https://docs.operaton.org/docs/documentation/user-guide/process-engine/external-tasks/)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/viadee/external-task-retry-aspect/maven-build.yml)
 [![](https://img.shields.io/github/issues/viadee/external-task-retry-aspect)](https://github.com/viadee/external-task-retry-aspect/issues)
 [![](https://img.shields.io/github/stars/viadee/external-task-retry-aspect)](https://github.com/viadee/external-task-retry-aspect/stargazers)
@@ -224,6 +225,7 @@ any issue, please feel free to contact me.
 |       1.10.0 |                       7.23.0 |                   Unsupported |                           3.4.x |
 |      1.11.0+ |                       7.24.0 |                   Unsupported |                           3.5.x |
 |      1.12.0+ |                       7.24.0 |                         1.0.3 |                           3.5.x |
+|      1.13.0+ |                       7.24.0 |                 1.1.5 & 2.1.5 |                   3.5.x & 4.0.x |
 
 
 ## 🤹 Collaboration
