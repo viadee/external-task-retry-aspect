@@ -55,6 +55,9 @@
         </profile>
         <profile>
             <id>spring-4</id>
+                <activation>
+                  <activeByDefault>true</activeByDefault>
+                </activation>
             <properties>
                 <java.version>21</java.version>
                 <spring-boot.version>4.0.2</spring-boot.version>
@@ -98,7 +101,6 @@
             </build>
         </profile>
     </profiles>
-
 
     <properties>
         <!-- settings -->
