@@ -71,10 +71,7 @@ public class EdgeCaseTest extends CamundaBaseTest {
     @Test
     public void runtimeException() {
         // prepare
-        when(this.externalTask.getRetries()).thenReturn(null);
-        when(this.externalTask
-                .getExtensionProperty(this.properties.getIdentifier()))
-                    .thenReturn("P,P,P"); // sadly, 'P' is matched by the used regex currently -> use hard-wired Fallback 'PT10M' then
+        setupExternalTaskGetExtensionPropertyAndGetRetriesStubs("P,P,P"); // sadly, 'P' is matched by the used regex currently -> use hard-wired Fallback 'PT10M' then
 
         // test
         this.camundaExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException(), this.externalTask, this.externalTaskService);
@@ -92,10 +89,7 @@ public class EdgeCaseTest extends CamundaBaseTest {
     @Test
     public void noRetryBehaviour() {
         // prepare
-        when(this.externalTask.getRetries()).thenReturn(null);
-        when(this.externalTask
-                .getExtensionProperty(this.properties.getIdentifier()))
-                    .thenReturn("R0/PT2M");
+        setupExternalTaskGetExtensionPropertyAndGetRetriesStubs("R0/PT2M");
 
         // test
         this.camundaExternalTaskRetryAspect.handleErrorAfterThrown(this.joinPoint, new RuntimeException("test"), this.externalTask, this.externalTaskService);
@@ -107,6 +101,13 @@ public class EdgeCaseTest extends CamundaBaseTest {
         // assert
         this.assertRemainingRetries(0);
         this.assertNextRetryInterval(0);
+    }
+
+    private void setupExternalTaskGetExtensionPropertyAndGetRetriesStubs(String getExtensionPropertyReturnValue) {
+        when(this.externalTask.getRetries()).thenReturn(null);
+        when(this.externalTask
+                .getExtensionProperty(this.properties.getIdentifier()))
+                    .thenReturn(getExtensionPropertyReturnValue);
     }
 
 }
